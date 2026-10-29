@@ -9,7 +9,9 @@ import { clinic } from "@/content/clinic";
 import { pageMeta } from "@/lib/metadata";
 
 export function generateStaticParams() {
-  return clinic.doctors.map((doctor) => ({ slug: doctor.slug }));
+  const params = clinic.doctors.map((doctor) => ({ slug: doctor.slug }));
+  // Cache Components requires at least one result so the route can be prerendered.
+  return params.length > 0 ? params : [{ slug: "_" }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
