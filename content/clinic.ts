@@ -11,12 +11,15 @@ export type Testimonial = {
   authorised: true;
 };
 
+export type ServiceIcon = "joint" | "spine" | "arthritis" | "foot";
+
 export type Service = {
   slug: string;
   name: string;
   summary: string;
   paragraphs: string[];
   procedures: string[];
+  icon: ServiceIcon;
 };
 
 export type Doctor = {
@@ -49,6 +52,7 @@ export const clinic = {
   readyToPublish: true,
   copyrightYear: "2026",
   name: "Maximum Clinics",
+  legalName: "Maximum Healthcare Pvt. Ltd.",
   speciality: "Orthopaedic clinic",
   cityCountry: "Gandhi Nagar, Jammu",
   phone: "+919697353535",
@@ -67,8 +71,7 @@ export const clinic = {
   mapsUrl: "https://www.google.com/maps/place/Maximum+Clinics/@32.7002309,74.860236,17z",
   mapEmbedUrl: "https://maps.google.com/maps?q=32.7002309,74.860236&z=16&output=embed",
   geo: { latitude: 32.7002309, longitude: 74.860236 },
-  /** Turn on when the clinic asks for WhatsApp buttons. */
-  whatsappEnabled: false,
+  whatsappEnabled: true,
   social: [
     { label: "Instagram", href: "https://www.instagram.com/maximumclinics/" },
     { label: "Facebook", href: "https://www.facebook.com/maximumclinicsjammu/" },
@@ -85,12 +88,12 @@ export const clinic = {
   emergencyNote:
     "If you need emergency medical help, contact your local emergency number. This website cannot provide urgent or emergency care.",
   footerSummary:
-    "An orthopaedic clinic in Gandhi Nagar, Jammu. Address, hours, and phone numbers are the details published by the clinic.",
+    "Maximum Healthcare Pvt. Ltd., operating as Maximum Clinics. An orthopaedic clinic in Gandhi Nagar, Jammu.",
   hero: {
     eyebrow: "Orthopaedic clinic · Jammu",
     title: "Healthcare that puts you first.",
     description:
-      "Explore the services, check the hours, and find the information you need to plan a visit to Maximum Clinics in Gandhi Nagar.",
+      "Quality-driven, ethical, and patient-centric orthopaedic care in Gandhi Nagar, Jammu. Explore the services, hours, and how to plan a visit.",
     primaryCta: "Book an appointment",
     secondaryCta: "Explore our services",
   },
@@ -103,13 +106,45 @@ export const clinic = {
   about: {
     eyebrow: "The clinic",
     title: "An orthopaedic clinic in Gandhi Nagar.",
-    lede: "Maximum Clinics publishes its address, opening hours, and phone numbers so a visit can be planned with clear information.",
+    lede: "Maximum Healthcare Pvt. Ltd. is committed to delivering quality-driven, ethical and patient-centric healthcare services.",
     paragraphs: [
-      "Maximum Clinics is a medical clinic at Gole Market, 358/A, opposite Peer Baba, Apsara Road, Gandhi Nagar, Jammu 180004.",
-      "Public listings describe the practice as an orthopaedic clinic. The services on this website are the ones named on the clinic’s public business listing, including joint, spine, and bone-related care.",
+      "Maximum Clinics is a medical clinic at Gole Market, 358/A, opposite Peer Baba, Apsara Road, Gandhi Nagar, Jammu 180004. The practice is operated by Maximum Healthcare Pvt. Ltd.",
+      "Public listings describe the practice as an orthopaedic clinic. The specialties on this website cover bone and joint care, spine care, arthritis treatment, and foot and ankle care. Ask the clinic which visit is right for you.",
       "Individual doctor names and qualifications have not been published on the clinic’s Instagram profile or Google listing, so they are not shown here.",
     ],
   },
+  quality: {
+    eyebrow: "Quality, Accreditation & Professional Excellence",
+    title: "Our Accreditations & Affiliations",
+    intro:
+      "Maximum Healthcare Pvt. Ltd. is committed to delivering quality-driven, ethical and patient-centric healthcare services.",
+    body: "Our organisation takes pride in its affiliations and accreditations with NABH (National Accreditation Board for Hospitals & Healthcare Providers), NABL (National Accreditation Board for Testing and Calibration Laboratories), and the Arthritis Foundation of India.",
+    associations:
+      "These associations reflect our commitment to maintaining high standards of clinical care, patient safety, diagnostic quality, continuous improvement and professional excellence.",
+    tagline: "At Maximum Healthcare, quality is not just a standard; it is our commitment to every patient.",
+  },
+  careers: {
+    eyebrow: "Careers",
+    title: "Work with Maximum Clinics.",
+    lede: "Maximum Healthcare Pvt. Ltd. has not published a current vacancies list. You can send your details if you would like to be considered. This does not mean a role is open, and it does not confirm a job.",
+  },
+  accreditations: [
+    {
+      id: "nabh",
+      short: "NABH",
+      name: "National Accreditation Board for Hospitals & Healthcare Providers",
+    },
+    {
+      id: "nabl",
+      short: "NABL",
+      name: "National Accreditation Board for Testing and Calibration Laboratories",
+    },
+    {
+      id: "afi",
+      short: "AFI",
+      name: "Arthritis Foundation of India",
+    },
+  ],
   principles: [
     {
       title: "A published address",
@@ -212,42 +247,64 @@ export const clinic = {
   doctors: [] as Doctor[],
   services: [
     {
-      slug: "orthopaedic-consultation",
-      name: "Orthopaedic consultation",
-      summary: "A consultation for bone and joint concerns. Call the clinic to ask what a first visit includes.",
-      paragraphs: [
-        "Maximum Clinics is publicly listed as an orthopaedic clinic in Gandhi Nagar, Jammu.",
-        "This page does not describe a consultation in clinical detail. Ask the clinic what to expect, and what to bring, when a visit is confirmed.",
-      ],
-      procedures: [],
-    },
-    {
-      slug: "joint-care",
-      name: "Joint care",
-      summary: "Knee, hip, shoulder, and ligament services named on the clinic’s public listing.",
+      slug: "bone-joint-care",
+      name: "Bone & Joint Care",
+      summary: "Hip, knee, shoulder, elbow, fracture, and sports-injury care for bones and joints.",
       paragraphs: [procedureNote],
+      icon: "joint",
       procedures: [
-        "Knee pain",
-        "Knee osteotomy",
-        "Ligament reconstruction",
-        "Hip resurfacing",
-        "Shoulder replacement",
-        "Elbow replacement",
+        "Hip Replacement",
+        "Knee Replacement",
+        "Shoulder Disorders",
+        "Elbow Conditions",
+        "Fracture Management",
+        "Sports Injuries",
       ],
     },
     {
       slug: "spine-care",
-      name: "Spine care",
-      summary: "Neck, back, and spinal services named on the clinic’s public listing.",
+      name: "Spine Care",
+      summary: "Back pain, disc, stenosis, scoliosis, and spine-trauma care.",
       paragraphs: [procedureNote],
-      procedures: ["Neck pain", "Back pain", "Laminectomy", "Spinal disc surgery"],
+      icon: "spine",
+      procedures: [
+        "Back Pain Treatment",
+        "Disc Disorders",
+        "Spinal Stenosis",
+        "Scoliosis Treatment",
+        "Minimally Invasive Spine Surgery",
+        "Spine Trauma",
+      ],
     },
     {
-      slug: "bone-and-foot-care",
-      name: "Bone and foot care",
-      summary: "Bone-health and foot services named on the clinic’s public listing.",
+      slug: "arthritis-treatment",
+      name: "Arthritis Treatment",
+      summary: "Osteoarthritis, rheumatoid arthritis, gout, and related joint-inflammation care.",
       paragraphs: [procedureNote],
-      procedures: ["Osteoporosis management", "Functional orthopaedics", "Podiatric consultation"],
+      icon: "arthritis",
+      procedures: [
+        "Osteoarthritis",
+        "Rheumatoid Arthritis",
+        "Gout",
+        "Juvenile Arthritis",
+        "Arthritis Management",
+        "Regenerative Therapies (PRP & Stem Cell)",
+      ],
+    },
+    {
+      slug: "foot-ankle-care",
+      name: "Foot & Ankle Care",
+      summary: "Sprains, flat foot, heel pain, deformities, and toe conditions.",
+      paragraphs: [procedureNote],
+      icon: "foot",
+      procedures: [
+        "Ankle Sprain Treatment",
+        "Flat Foot Correction",
+        "Heel Pain (Plantar Fasciitis)",
+        "Foot Deformities",
+        "Sports Injuries",
+        "Bunions & Toe Conditions",
+      ],
     },
   ] satisfies Service[],
   testimonials: [] as Testimonial[],
@@ -273,7 +330,7 @@ export function getFaqs() {
     {
       question: "What services are available?",
       answer:
-        "The public listing names orthopaedic consultation, joint care, spine care, and bone and foot care. Ask the clinic which of those is the right visit for you.",
+        "The clinic lists bone and joint care, spine care, arthritis treatment, and foot and ankle care. Ask which of those is the right visit for you.",
     },
     {
       question: "What should I bring to my first visit?",
@@ -291,6 +348,16 @@ export function getFaqs() {
     {
       question: "How can I contact the clinic?",
       answer: `Call ${numbers}. There is no public email address on the clinic’s profiles. Instagram and Facebook links are on the contact page.`,
+    },
+    {
+      question: "What accreditations does the clinic hold?",
+      answer:
+        "Maximum Healthcare Pvt. Ltd. states affiliations and accreditations with NABH, NABL, and the Arthritis Foundation of India. These are shown on the About page.",
+    },
+    {
+      question: "Are there jobs at the clinic?",
+      answer:
+        "A current vacancies list has not been published. You can send your details on the Careers page. That is an application of interest, not a job offer.",
     },
   ];
 }

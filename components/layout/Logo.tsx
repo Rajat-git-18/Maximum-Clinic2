@@ -5,7 +5,7 @@ import { clinic } from "@/content/clinic";
 export function Logo() {
   return (
     <Link href="/" className="logo">
-      <Image className="logo-mark" src="/brand/logo-mark.jpg" width={44} height={44} alt="" priority />
+      <Image className="logo-mark" src="/brand/logo-mark.jpg" width={46} height={46} alt="" priority />
       <span className="logo-text">
         <span className="logo-name">{clinic.name}</span>
         <span className="logo-specialty">{clinic.cityCountry}</span>

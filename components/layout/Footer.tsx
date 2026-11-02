@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { AccreditationStrip } from "@/components/home/AccreditationStrip";
 import { Logo } from "@/components/layout/Logo";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { clinic } from "@/content/clinic";
-import { locationLabel, mapsHref, telHref } from "@/lib/clinic-facts";
+import { WhatsAppIcon } from "@/components/ui/Icons";
+import { locationLabel, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
 import { policyNav, primaryNav } from "@/lib/navigation";
 
 export function Footer() {
@@ -14,6 +16,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="footer-summary">{clinic.footerSummary}</p>
+          <AccreditationStrip />
           <SocialLinks />
         </div>
         <nav aria-label="Footer">
@@ -46,6 +49,20 @@ export function Footer() {
                 <li key={item.e164}>{href ? <a href={href}>{item.display}</a> : item.display}</li>
               );
             })}
+            {clinic.whatsappEnabled && whatsappHref(clinic.phone) ? (
+              <li>
+                <a
+                  className="footer-whatsapp"
+                  href={whatsappHref(clinic.phone) ?? undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsAppIcon />
+                  WhatsApp
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+            ) : null}
             {clinic.schedule.map((item) => (
               <li key={item.days}>
                 {item.days}: {item.hours}
@@ -70,7 +87,7 @@ export function Footer() {
           ))}
         </ul>
         <p>
-          © {clinic.copyrightYear} {clinic.name}. All rights reserved.
+          © {clinic.copyrightYear} {clinic.legalName} · {clinic.name}. All rights reserved.
         </p>
         <p className="footer-emergency">{clinic.emergencyNote}</p>
       </div>

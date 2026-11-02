@@ -1,19 +1,19 @@
+import { BookWindow } from "@/components/home/BookWindow";
+import { SpecialtiesGrid } from "@/components/home/SpecialtiesGrid";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ServiceList } from "@/components/home/ServiceList";
 
 export function ServicesSection() {
   return (
-    <section className="section" id="services" aria-labelledby="services-heading">
+    <section className="section specialties-section" id="services" aria-labelledby="services-heading">
       <Container>
-        <SectionHeading
-          id="services-heading"
-          eyebrow="Services"
-          title="Care, named plainly."
-          lede="These are the services named on the clinic’s public listing. Call to ask which one fits the visit."
-          split
-        />
-        <ServiceList />
+        <div className="specialties-heading">
+          <h2 id="services-heading">
+            Our <span>Specialties</span>
+          </h2>
+          <p>Bone, joint, spine, arthritis, and foot care. Ask the clinic which visit is right for you.</p>
+        </div>
+        <SpecialtiesGrid />
+        <BookWindow />
       </Container>
     </section>
   );

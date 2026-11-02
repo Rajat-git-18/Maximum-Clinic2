@@ -51,3 +51,7 @@ Checked on 29 October 2026.
 - Authentic interior or exterior photographs suitable to republish. Google has 16 photos; they were not downloaded or presented as site imagery.
 - Patient reviews from other directories. Counts conflict with Google (other sites 67–235). Only the Google listing opened on 29 October 2026 is used: 4.7 from 88 reviews, and the first three review texts Google showed, unedited. The page links to the full Google list.
 - The Instagram phrase “Best healthcare centre” is the clinic’s own bio line. It is not repeated as a claim on the website.
+
+## Client-supplied 2 November 2026
+
+The clinic provided the legal name Maximum Healthcare Pvt. Ltd., a quality statement, and affiliations with NABH, NABL, and the Arthritis Foundation of India. These are published as the organisation’s own copy. Official NABH/NABL artwork was not supplied, so the site uses original marks with the official names. Directory numbers were not independently re-checked against NABH or NABL lists. This is not Max Healthcare, the national hospital chain.

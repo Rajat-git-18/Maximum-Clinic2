@@ -17,8 +17,9 @@ export const primaryNav: NavItem[] = [
   { href: "/about", label: "About" },
   ...(clinic.doctors.length > 0 ? [{ href: doctorsHref(), label: "Doctors" }] : []),
   { href: "/services", label: "Services" },
-  { href: "/resources", label: "Patient resources" },
+  { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
+  { href: "/careers", label: "Careers" },
 ];
 
 export const policyNav: NavItem[] = [

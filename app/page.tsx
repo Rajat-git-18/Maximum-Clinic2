@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/home/AboutSection";
+import { Accreditations } from "@/components/home/Accreditations";
 import { ContactSection } from "@/components/home/ContactSection";
 import { DoctorsSection } from "@/components/home/DoctorsSection";
 import { FaqSection } from "@/components/home/FaqSection";
@@ -28,6 +29,7 @@ export default function HomePage() {
       <ServicesSection />
       <DoctorsSection />
       <AboutSection />
+      <Accreditations />
       <TestimonialsSection />
       <WhySection />
       <GallerySection />

@@ -1,5 +1,7 @@
 import type { ReactElement } from "react";
+import { WhatsAppIcon } from "@/components/ui/Icons";
 import { clinic } from "@/content/clinic";
+import { whatsappHref } from "@/lib/clinic-facts";
 
 function InstagramIcon() {
   return (
@@ -28,10 +30,18 @@ const icons: Record<string, () => ReactElement> = {
 };
 
 export function SocialLinks() {
-  if (clinic.social.length === 0) return null;
+  const whatsapp = clinic.whatsappEnabled ? whatsappHref(clinic.phone) : null;
+  if (clinic.social.length === 0 && !whatsapp) return null;
 
   return (
     <ul className="social-row">
+      {whatsapp ? (
+        <li>
+          <a className="social-wa" href={whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <WhatsAppIcon />
+          </a>
+        </li>
+      ) : null}
       {clinic.social.map((item) => {
         const Icon = icons[item.label];
         return (

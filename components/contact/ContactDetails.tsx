@@ -69,17 +69,17 @@ export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3"
               </a>
             ) : null;
           })}
-          {clinic.whatsappEnabled
-            ? clinic.phones.map((item) => {
-                const href = whatsappHref(item.e164);
-                return href ? (
-                  <a className="btn btn-secondary" href={href} key={`wa-${item.e164}`} target="_blank" rel="noopener noreferrer">
-                    WhatsApp {item.display}
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                ) : null;
-              })
-            : null}
+          {clinic.whatsappEnabled && whatsappHref(clinic.phone) ? (
+            <a
+              className="btn btn-whatsapp"
+              href={whatsappHref(clinic.phone) ?? undefined}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          ) : null}
         </div>
         <SocialLinks />
       </div>

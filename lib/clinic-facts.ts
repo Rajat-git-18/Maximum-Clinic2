@@ -103,6 +103,7 @@ export function localBusinessJsonLd(): Record<string, unknown> | null {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     name: clinic.name,
+    legalName: clinic.legalName,
     url: siteUrl(),
     image: `${siteUrl()}/brand/logo-mark.jpg`,
     telephone: phone,
@@ -138,5 +139,10 @@ export function localBusinessJsonLd(): Record<string, unknown> | null {
     ],
     sameAs: clinic.social.map((item) => item.href),
     employee: doctors.length > 0 ? doctors : undefined,
+    memberOf: clinic.accreditations.map((item) => ({
+      "@type": "Organization",
+      name: item.name,
+      alternateName: item.short,
+    })),
   };
 }

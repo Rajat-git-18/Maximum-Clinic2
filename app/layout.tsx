@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import { Suspense } from "react";
+import { CallbackModal } from "@/components/contact/CallbackModal";
+import { QuickAccess } from "@/components/contact/QuickAccess";
+import { AccreditationBar } from "@/components/layout/AccreditationBar";
 import { DraftNotice } from "@/components/layout/DraftNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -49,11 +52,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           <Header />
         </Suspense>
+        <AccreditationBar />
         <main id="main" tabIndex={-1}>
           <DraftNotice />
           {children}
         </main>
         <Footer />
+        <CallbackModal />
+        <QuickAccess />
         <JsonLd />
       </body>
     </html>

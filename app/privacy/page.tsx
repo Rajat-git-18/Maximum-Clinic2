@@ -37,11 +37,17 @@ export default function PrivacyPage() {
       <p>
         Do not use the note for a detailed medical history. The form is not a secure clinical messaging system.
       </p>
+      <h2>What the careers form asks for</h2>
+      <p>
+        The careers form asks for name, phone, optional email, a role interest, optional qualification, experience,
+        optional city, and an optional note. It is an application of interest, not a job offer, and it does not
+        accept file uploads.
+      </p>
       <h2>What happens when you submit</h2>
       <p>
-        If no booking inbox has been connected, the form checks the details and then stops. Nothing is emailed,
-        stored in a database, or saved in the browser. The confirmation on screen will say that the request was not
-        sent.
+        If no intake inbox has been connected, the appointment, callback, and careers forms check the details and
+        then stop. Nothing is emailed, stored in a database, or saved in the browser. The confirmation on screen
+        will say that the request was not sent.
       </p>
       <p>
         If the clinic later connects an intake address, the same details are sent from the server to that address

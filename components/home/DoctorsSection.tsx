@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 import { DoctorFacts } from "@/components/doctors/DoctorFacts";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -14,30 +14,30 @@ export function DoctorsSection() {
     return (
       <section className="section" id="specialists" aria-labelledby="doctors-heading">
         <Container>
-          <SectionHeading
-            id="doctors-heading"
-            eyebrow="Specialist doctors"
-            title="Orthopaedic care, by speciality."
-            lede="These are the specialist areas named on the clinic’s public listing. Individual doctor names have not been published, so they are not shown here."
-          />
-          <ul className="specialist-grid">
-            {clinic.services.map((service, index) => (
-              <li className="specialist-card" key={service.slug}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>
-                  <Link href={`/services/${service.slug}`}>{service.name}</Link>
-                </h3>
-                <p>{service.summary}</p>
-                {service.procedures.length > 0 ? (
-                  <ul>
-                    {service.procedures.map((procedure) => (
-                      <li key={procedure}>{procedure}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+          <div className="doctors-empty">
+            <div>
+              <SectionHeading
+                id="doctors-heading"
+                eyebrow="Specialist doctors"
+                title="Doctor profiles come next."
+                lede="Individual doctor names have not been published on the clinic’s public listings, so they are not shown here. Call or use WhatsApp to ask who you would see."
+              />
+              <div className="cta-row">
+                <Button href="/services" variant="secondary">
+                  View specialties
+                </Button>
+                <Button href="/contact">Contact the clinic</Button>
+              </div>
+            </div>
+            <div className="doctors-photo">
+              <Image
+                src="/media/consultation-stock.jpg"
+                alt="Stock photograph of a clinician discussing a scan. Not a photograph of this clinic or its doctors."
+                width={1400}
+                height={933}
+              />
+            </div>
+          </div>
         </Container>
       </section>
     );

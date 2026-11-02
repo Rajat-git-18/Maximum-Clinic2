@@ -1,5 +1,4 @@
 import { clinic } from "@/content/clinic";
-import { locationLabel } from "@/lib/clinic-facts";
 
 export function TrustStrip() {
   const doctor = clinic.doctors[0];
@@ -7,7 +6,7 @@ export function TrustStrip() {
     { label: "Speciality", value: clinic.speciality },
     doctor ? { label: "Experience", value: doctor.experience } : null,
     doctor ? { label: "Qualifications", value: doctor.qualifications } : null,
-    { label: "Location", value: locationLabel() },
+    { label: "Location", value: clinic.cityCountry },
     { label: "Hours", value: clinic.hoursShort },
   ].filter((item): item is { label: string; value: string } => Boolean(item?.value));
 

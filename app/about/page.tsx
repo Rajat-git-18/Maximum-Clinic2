@@ -1,3 +1,4 @@
+import { Accreditations } from "@/components/home/Accreditations";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -7,7 +8,7 @@ import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "About",
-  description: `${clinic.name} is a ${clinic.speciality} practice in ${clinic.cityCountry}. This page describes the approach to care without unverified claims.`,
+  description: `${clinic.legalName} operates ${clinic.name}, a ${clinic.speciality} practice in ${clinic.cityCountry}. Quality-driven, ethical and patient-centric care, with NABH, NABL, and Arthritis Foundation of India affiliations.`,
   path: "/about",
 });
 
@@ -30,10 +31,7 @@ export default function AboutPage() {
               {clinic.about.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
-              <p className="callout">
-                Doctor names, qualifications, and a longer clinic history are not published here because they are not
-                on the clinic’s public profiles.
-              </p>
+              <p className="callout">{clinic.quality.tagline}</p>
             </div>
             <PlaceholderMedia
               label="Clinic interior"
@@ -45,7 +43,8 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-      <section className="section section-tight">
+      <Accreditations />
+      <section className="section">
         <Container>
           <h2>What patients can expect</h2>
           <ol className="principle-list">
