@@ -30,6 +30,16 @@ export function utcTodayIso(now = new Date()): string {
   return now.toISOString().slice(0, 10);
 }
 
+/** Clinic operates in India — use Asia/Kolkata calendar date as "today". */
+export function clinicTodayIso(now = new Date(), timeZone = "Asia/Kolkata"): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+}
+
 export function addUtcDays(iso: string, days: number): string {
   const [year, month, day] = iso.split("-").map(Number);
   const date = new Date(Date.UTC(year, month - 1, day));
@@ -37,13 +47,12 @@ export function addUtcDays(iso: string, days: number): string {
   return date.toISOString().slice(0, 10);
 }
 
-/** Allows a one-day margin so a patient's local "today" is not rejected by UTC. */
+/** Preferred dates must be today or later (India calendar), within the next year. */
 export function isPreferredDateAcceptable(iso: string, now = new Date()): boolean {
   if (!isRealIsoDate(iso)) return false;
-  const today = utcTodayIso(now);
-  const earliest = addUtcDays(today, -1);
+  const today = clinicTodayIso(now);
   const latest = addUtcDays(today, 366);
-  return iso >= earliest && iso <= latest;
+  return iso >= today && iso <= latest;
 }
 
 export function formatDisplayDate(iso: string): string {

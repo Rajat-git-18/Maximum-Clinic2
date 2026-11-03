@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AccreditationMark } from "@/components/ui/AccreditationMarks";
 import { clinic } from "@/content/clinic";
@@ -22,9 +23,15 @@ export function Accreditations() {
             </li>
           ))}
         </ul>
-        <p className="accreditations-body">{clinic.quality.body}</p>
-        <p className="accreditations-body">{clinic.quality.associations}</p>
-        <p className="quality-quote">{clinic.quality.tagline}</p>
+        <p className="accreditations-body">
+          <EmphasizedText text={clinic.quality.body} />
+        </p>
+        <p className="accreditations-body">
+          <EmphasizedText text={clinic.quality.associations} />
+        </p>
+        <p className="quality-quote">
+          <EmphasizedText text={clinic.quality.tagline} />
+        </p>
       </Container>
     </section>
   );

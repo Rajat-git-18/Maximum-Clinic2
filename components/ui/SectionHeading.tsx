@@ -1,3 +1,5 @@
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -16,9 +18,15 @@ export function SectionHeading({
       <div className="section-heading split">
         <div>
           <p className="eyebrow">{eyebrow}</p>
-          <h2 id={id}>{title}</h2>
+          <h2 id={id}>
+            <EmphasizedText text={title} />
+          </h2>
         </div>
-        {lede ? <p className="lede">{lede}</p> : null}
+        {lede ? (
+          <p className="lede">
+            <EmphasizedText text={lede} />
+          </p>
+        ) : null}
       </div>
     );
   }
@@ -26,8 +34,14 @@ export function SectionHeading({
   return (
     <div className="section-heading">
       <p className="eyebrow">{eyebrow}</p>
-      <h2 id={id}>{title}</h2>
-      {lede ? <p className="lede">{lede}</p> : null}
+      <h2 id={id}>
+        <EmphasizedText text={title} />
+      </h2>
+      {lede ? (
+        <p className="lede">
+          <EmphasizedText text={lede} />
+        </p>
+      ) : null}
     </div>
   );
 }

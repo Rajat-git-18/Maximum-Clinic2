@@ -11,6 +11,7 @@ export const metadata = pageMeta({
   title: "Staff desk",
   description: "Staff inbox for appointment requests and career applications at Maximum Healthcare.",
   path: "/staff",
+  noIndex: true,
 });
 
 async function StaffDeskContent() {

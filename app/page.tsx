@@ -27,10 +27,10 @@ export default function HomePage() {
       <TrustStrip />
       <ServicesSection />
       <AboutSection />
+      <GallerySection />
       <Accreditations />
       <VideosSection />
       <TestimonialsSection />
-      <GallerySection />
       <PatientJourney />
       <FaqSection />
       <ContactSection />

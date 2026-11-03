@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Logo } from "@/components/layout/Logo";
 import { PublicOnly } from "@/components/layout/PublicOnly";
+import { CookieNotice } from "@/components/analytics/CookieNotice";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <CallbackModal />
           <QuickAccess />
           <JsonLd />
+          <CookieNotice />
         </PublicOnly>
       </body>
     </html>

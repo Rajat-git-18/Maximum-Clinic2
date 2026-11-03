@@ -10,12 +10,13 @@ function sessionSecret(): string {
   return "";
 }
 
-export function staffCredentials(): { username: string; password: string } | null {
-  const username = process.env.STAFF_USERNAME?.trim() || (process.env.NODE_ENV !== "production" ? "staff" : "");
-  const password =
-    process.env.STAFF_PASSWORD?.trim() || (process.env.NODE_ENV !== "production" ? "MaximumStaff2026" : "");
-  if (!username || !password || !sessionSecret()) return null;
-  return { username, password };
+/** Username + session secret must exist. Password may come from env bootstrap or a stored hash. */
+export function staffUsername(): string {
+  return process.env.STAFF_USERNAME?.trim() || (process.env.NODE_ENV !== "production" ? "staff" : "");
+}
+
+export function staffAuthConfigured(): boolean {
+  return Boolean(staffUsername() && sessionSecret());
 }
 
 function sign(payload: string): string {
@@ -44,8 +45,7 @@ export function verifyStaffSessionToken(token: string | undefined | null): { use
   }
   const expiresAt = Number(expires);
   if (!Number.isFinite(expiresAt) || expiresAt < Date.now()) return null;
-  const credentials = staffCredentials();
-  if (!credentials || credentials.username !== username) return null;
+  if (username !== staffUsername()) return null;
   return { username };
 }
 

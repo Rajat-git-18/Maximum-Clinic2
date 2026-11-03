@@ -55,8 +55,9 @@ export default function PrivacyPage() {
           external advertising networks or data brokers.
         </li>
         <li>
-          <strong>Zero tracking cookies:</strong> this website does not deploy invasive tracking cookies or third-party
-          behavioral advertising scripts to harvest personal patient data.
+          <strong>Analytics cookies:</strong> visit counting with Google Analytics starts only after you accept the
+          cookie notice. Declining leaves it off. We do not use advertising cookies, and we do not sell visit data. A
+          separate sign-in cookie is used only for the staff desk.
         </li>
       </ul>
 
@@ -84,6 +85,10 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Phone assistance:</strong> <a href="tel:+919419029200">+91 94190 29200</a>
+        </li>
+        <li>
+          <strong>Email:</strong>{" "}
+          <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
         </li>
       </ul>
     </LegalPage>

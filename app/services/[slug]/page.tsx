@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FinalCta } from "@/components/home/FinalCta";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
-import { telHref } from "@/lib/clinic-facts";
+import { plainText, siteUrl, telHref } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export function generateStaticParams() {
@@ -33,8 +35,24 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const callHref = telHref(clinic.phone);
   const callLabel = clinic.phones[0]?.display ?? "94190 29200";
 
+  const pageTitle = service.pageTitle ?? service.name;
+
   return (
     <>
+      <JsonLdScript
+        data={{
+          "@context": "https://schema.org",
+          "@type": "MedicalWebPage",
+          name: plainText(pageTitle),
+          description: plainText(service.summary),
+          url: `${siteUrl()}/services/${service.slug}`,
+          about: {
+            "@type": "MedicalClinic",
+            name: clinic.name,
+            url: siteUrl(),
+          },
+        }}
+      />
       <PageHero
         eyebrow="Service"
         title={service.pageTitle ?? service.name}
@@ -49,7 +67,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <Container narrow>
           <div className="prose">
             {service.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>
+                <EmphasizedText text={paragraph} />
+              </p>
             ))}
             {service.offerings && service.offerings.length > 0 ? (
               <>
@@ -60,7 +80,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   {service.offerings.map((offering) => (
                     <li className="service-offering" key={offering.title}>
                       <h3>{offering.title}</h3>
-                      <p>{offering.body}</p>
+                      <p>
+                        <EmphasizedText text={offering.body} />
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -75,7 +97,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {service.guidance ? (
               <aside className="service-guidance">
                 <p className="eyebrow">Clinical note</p>
-                <p>{service.guidance}</p>
+                <p>
+                  <EmphasizedText text={service.guidance} />
+                </p>
               </aside>
             ) : (
               <p className="callout">

@@ -1,6 +1,7 @@
 import { ClinicVideo } from "@/components/media/ClinicVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
 import { telHref } from "@/lib/clinic-facts";
@@ -33,14 +34,17 @@ export default function VideosPage() {
             <div>
               <div className="prose">
                 {clinic.videos.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>
+                    <EmphasizedText text={paragraph} />
+                  </p>
                 ))}
                 <p className="callout">
                   <strong>{clinic.videos.noteTitle}. </strong>
-                  {clinic.videos.note}
+                  <EmphasizedText text={clinic.videos.note} />
                 </p>
                 <p>
-                  {clinic.videos.questionsTitle} {clinic.videos.questions}
+                  {clinic.videos.questionsTitle}{" "}
+                  <EmphasizedText text={clinic.videos.questions} />
                 </p>
               </div>
               <div className="cta-row">

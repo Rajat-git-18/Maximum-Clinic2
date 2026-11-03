@@ -2,14 +2,15 @@ import { Accreditations } from "@/components/home/Accreditations";
 import { FinalCta } from "@/components/home/FinalCta";
 import { PromiseGrid } from "@/components/home/PromiseGrid";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { PageHero } from "@/components/ui/PageHero";
-import { ClinicPhoto } from "@/components/media/ClinicPhoto";
 import { clinic } from "@/content/clinic";
+import { plainText } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "About",
-  description: `${clinic.about.title}. ${clinic.about.lede} ${clinic.name} in ${clinic.cityCountry}, operated by ${clinic.legalName}.`,
+  description: `${clinic.about.title}. ${plainText(clinic.about.lede)} ${clinic.name} in ${clinic.cityCountry}, operated by ${clinic.legalName}.`,
   path: "/about",
 });
 
@@ -27,14 +28,15 @@ export default function AboutPage() {
       />
       <section className="section">
         <Container>
-          <div className="about-grid">
-            <div className="prose">
-              {clinic.about.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              <p className="callout">{clinic.quality.tagline}</p>
-            </div>
-            <ClinicPhoto photo={clinic.gallery[0]} />
+          <div className="prose about-copy">
+            {clinic.about.paragraphs.map((paragraph) => (
+              <p key={paragraph}>
+                <EmphasizedText text={paragraph} />
+              </p>
+            ))}
+            <p className="callout">
+              <EmphasizedText text={clinic.quality.tagline} />
+            </p>
           </div>
         </Container>
       </section>
@@ -45,7 +47,9 @@ export default function AboutPage() {
             {clinic.services.map((service) => (
               <li key={service.slug}>
                 <h3>{service.name}</h3>
-                <p>{service.summary}</p>
+                <p>
+                  <EmphasizedText text={service.summary} />
+                </p>
               </li>
             ))}
           </ul>

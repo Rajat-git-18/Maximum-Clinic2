@@ -1,6 +1,7 @@
 import { BookWindow } from "@/components/home/BookWindow";
 import { SpecialtiesGrid } from "@/components/home/SpecialtiesGrid";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 
 export function ServicesSection() {
   return (
@@ -10,7 +11,9 @@ export function ServicesSection() {
           <h2 id="services-heading">
             Our <span>Specialties</span>
           </h2>
-          <p>Bone and joint care, spine care and rehabilitation, arthritis treatment, and foot and ankle care.</p>
+          <p>
+            <EmphasizedText text="**Bone and joint care**, **spine care and rehabilitation**, **arthritis treatment**, and **foot and ankle care**." />
+          </p>
         </div>
         <SpecialtiesGrid />
         <BookWindow />

@@ -1,11 +1,12 @@
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { clinic } from "@/content/clinic";
-import { locationLabel, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
+import { clinicLocationLabels, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
 
 export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3" }) {
   const Title = titleLevel;
   const email = mailtoHref(clinic.email);
   const maps = mapsHref();
+  const locations = clinicLocationLabels();
 
   return (
     <div className="contact-grid">
@@ -13,8 +14,14 @@ export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3"
         <Title>Visit or call</Title>
         <dl className="doctor-meta">
           <div>
-            <dt>Location</dt>
-            <dd>{locationLabel()}</dd>
+            <dt>Locations</dt>
+            <dd>
+              {locations.map((item) => (
+                <span key={item} className="contact-line">
+                  {item}
+                </span>
+              ))}
+            </dd>
           </div>
           <div>
             <dt>Telephone</dt>

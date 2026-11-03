@@ -1,8 +1,9 @@
 import { CareerForm } from "@/components/careers/CareerForm";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
-import { telHref } from "@/lib/clinic-facts";
+import { mailtoHref, telHref } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
@@ -13,6 +14,7 @@ export const metadata = pageMeta({
 
 export default function CareersPage() {
   const callHref = telHref(clinic.phone);
+  const emailHref = mailtoHref(clinic.email);
 
   return (
     <>
@@ -29,7 +31,9 @@ export default function CareersPage() {
         <Container>
           <div className="prose career-intro">
             {clinic.careers.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>
+                <EmphasizedText text={paragraph} />
+              </p>
             ))}
           </div>
           <h2 className="career-steps-title">{clinic.careers.stepsTitle}</h2>
@@ -38,7 +42,9 @@ export default function CareersPage() {
               <li key={step.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <p>
+                  <EmphasizedText text={step.body} />
+                </p>
               </li>
             ))}
           </ol>
@@ -61,6 +67,14 @@ export default function CareersPage() {
                     )}
                   </dd>
                 </div>
+                {emailHref ? (
+                  <div>
+                    <dt>{clinic.careers.contact.emailLabel}</dt>
+                    <dd>
+                      <a href={emailHref}>{clinic.email}</a>
+                    </dd>
+                  </div>
+                ) : null}
               </dl>
               <p>{clinic.careers.contact.note}</p>
             </aside>

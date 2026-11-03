@@ -89,6 +89,10 @@ export default function TermsPage() {
         <li>
           <strong>Phone helpdesk:</strong> <a href="tel:+919419029200">+91 94190 29200</a>
         </li>
+        <li>
+          <strong>Email:</strong>{" "}
+          <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
+        </li>
       </ul>
     </LegalPage>
   );

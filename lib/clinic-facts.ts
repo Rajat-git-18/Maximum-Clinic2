@@ -62,6 +62,11 @@ export function mailtoHref(value: string): string | null {
   return `mailto:${value}`;
 }
 
+/** Strip light emphasis markers used in public copy. */
+export function plainText(value: string): string {
+  return value.replace(/\*\*/g, "");
+}
+
 export function locationLabel(): string {
   const { street, locality, region, postalCode, country } = clinic.address;
   const parts = [street, locality, region, postalCode, country].map((part) => part.trim()).filter(Boolean);
@@ -69,6 +74,27 @@ export function locationLabel(): string {
     return parts.join(", ");
   }
   return clinic.cityCountry;
+}
+
+export function formatClinicLocation(location: {
+  label: string;
+  street?: string;
+  locality: string;
+  region: string;
+  postalCode?: string;
+  country: string;
+}): string {
+  const parts = [location.street, location.locality, location.region, location.postalCode, location.country]
+    .map((part) => part?.trim() ?? "")
+    .filter(Boolean);
+  if (parts.length > 0 && parts.every((part) => !isPlaceholder(part))) {
+    return parts.join(", ");
+  }
+  return location.label;
+}
+
+export function clinicLocationLabels(): string[] {
+  return clinic.locations.map(formatClinicLocation);
 }
 
 export function mapsHref(): string | null {
@@ -137,6 +163,10 @@ export function localBusinessJsonLd(): Record<string, unknown> | null {
         closes: "15:30",
       },
     ],
+    areaServed: clinic.locations.map((location) => ({
+      "@type": "City",
+      name: location.locality,
+    })),
     sameAs: clinic.social.map((item) => item.href),
     employee: doctors.length > 0 ? doctors : undefined,
     memberOf: clinic.accreditations.map((item) => ({

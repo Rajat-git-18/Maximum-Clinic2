@@ -1,6 +1,7 @@
 import { ClinicPhoto } from "@/components/media/ClinicPhoto";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
 import { pageMeta } from "@/lib/metadata";
@@ -27,7 +28,9 @@ export default function GalleryPage() {
         <Container>
           <div className="prose gallery-intro">
             {clinic.galleryPage.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>
+                <EmphasizedText text={paragraph} />
+              </p>
             ))}
           </div>
         </Container>

@@ -30,15 +30,14 @@ export default function AccessibilityPage() {
       <ul>
         <li>Gallery photographs are clinic-supplied stills. They are labelled by room, not as a live view of the clinic.</li>
         <li>Written transcripts for the clinic films have not been published yet.</li>
-        <li>The appointment form cannot be completed as a real booking until an inbox is connected.</li>
         <li>The interface is in English. Hindi can be added when translations are supplied.</li>
-        <li>A public email address has not been published. Individual doctor profiles are not listed on this website.</li>
+        <li>Individual doctor profiles are not listed on this website.</li>
       </ul>
       <h2>If something blocks you</h2>
       <p>
-        Call {clinic.phones.map((item) => item.display).join(" or ")}. Say which page you were on and what you were
-        trying to do. You can also start from the{" "}
-        <Link href="/contact">contact page</Link>.
+        Call {clinic.phones.map((item) => item.display).join(" or ")}, or email{" "}
+        <a href={`mailto:${clinic.email}`}>{clinic.email}</a>. Say which page you were on and what you were trying to
+        do. You can also start from the <Link href="/contact">contact page</Link>.
       </p>
       <h2>Clinic access</h2>
       <p>

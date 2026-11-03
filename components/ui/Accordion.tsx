@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 
 export type AccordionItem = {
   question: string;
@@ -41,7 +42,9 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
               inert={!open}
             >
               <div>
-                <p>{item.answer}</p>
+                <p>
+                  <EmphasizedText text={item.answer} />
+                </p>
               </div>
             </div>
           </div>

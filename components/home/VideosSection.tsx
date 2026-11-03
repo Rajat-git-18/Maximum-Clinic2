@@ -1,6 +1,7 @@
 import { ClinicVideo } from "@/components/media/ClinicVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { clinic } from "@/content/clinic";
 
@@ -21,7 +22,9 @@ export function VideosSection() {
             />
             <div className="prose">
               {clinic.videos.home.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>
+                  <EmphasizedText text={paragraph} />
+                </p>
               ))}
             </div>
             <div className="cta-row">

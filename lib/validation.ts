@@ -88,7 +88,7 @@ export function validateAppointment(
   if (!preferredDate) {
     errors.preferredDate = "Choose a preferred date.";
   } else if (!isRealIsoDate(preferredDate) || !isPreferredDateAcceptable(preferredDate, now)) {
-    errors.preferredDate = "Choose a current or future date within the next year. This is still only a preference.";
+    errors.preferredDate = "Choose today or a future date within the next year. Past dates cannot be requested.";
   }
   if (!TIME_VALUES.has(timeOfDay)) {
     errors.timeOfDay = "Choose a preferred part of the day, or no preference.";

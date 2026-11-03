@@ -5,8 +5,9 @@ import type { FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { submitAppointmentRequest } from "@/app/book/actions";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { clinic } from "@/content/clinic";
-import { formatDisplayDate } from "@/lib/dates";
+import { clinicTodayIso, formatDisplayDate } from "@/lib/dates";
 import {
   TIME_OPTIONS,
   emptyAppointment,
@@ -135,24 +136,36 @@ function AppointmentSession({
   if (terminal && state) {
     const delivered = state.status === "delivered";
     const statusLabel = delivered
-      ? "Request received"
+      ? "Thank you"
       : state.status === "rejected"
         ? "Not accepted"
         : "Not sent";
     return (
       <div className="result" data-status={state.status} role="status">
+        {delivered ? (
+          <div className="thank-you-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+        ) : null}
         <p className="eyebrow">{statusLabel}</p>
         <h2 ref={resultRef} tabIndex={-1}>
-          {delivered ? "Your request has reached the clinic." : "No appointment was booked."}
+          {delivered ? "Your appointment request is with us." : "No appointment was booked."}
         </h2>
-        <p>{state.message}</p>
+        <p className="result-lead">{state.message}</p>
         {delivered ? (
           <p className="result-next">
-            Please keep your phone available. Maximum Healthcare will review this request and call you back to confirm a
-            suitable visit time. Submitting the form does not reserve a slot by itself.
+            Please keep your phone available. Our team will call you back to confirm a suitable visit time. Submitting
+            the form does not reserve a slot by itself.
           </p>
         ) : null}
-        {state.status !== "rejected" ? <Review values={values} /> : null}
+        {state.status !== "rejected" ? (
+          <div className="result-summary">
+            <p className="result-summary-label">Your request</p>
+            <Review values={values} />
+          </div>
+        ) : null}
         <div className="cta-row">
           <button type="button" className="btn btn-secondary" onClick={onRestart}>
             Start another request
@@ -221,9 +234,11 @@ function AppointmentSession({
                     checked={values.service === service.slug}
                     onChange={() => update("service", service.slug)}
                   />
-                  <span>
+                    <span>
                     <span className="choice-title">{service.name}</span>
-                    <span className="choice-copy">{service.summary}</span>
+                    <span className="choice-copy">
+                      <EmphasizedText text={service.summary} />
+                    </span>
                   </span>
                 </label>
               ))}
@@ -282,6 +297,7 @@ function AppointmentSession({
               id={`${formId}-date`}
               name="preferredDate"
               type="date"
+              min={clinicTodayIso()}
               value={values.preferredDate}
               onChange={(event) => update("preferredDate", event.target.value)}
               aria-invalid={errors.preferredDate ? true : undefined}
@@ -291,7 +307,8 @@ function AppointmentSession({
               autoComplete="off"
             />
             <p id={`${formId}-date-help`} className="field-help">
-              This is a preference, not an open appointment. The clinic may suggest another day.
+              Choose today or a later day. Past dates are not accepted. This is still only a preference — the clinic may
+              suggest another day.
             </p>
             {errors.preferredDate ? (
               <p id={`${formId}-date-error`} className="field-error">

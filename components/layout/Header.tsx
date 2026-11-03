@@ -1,27 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/layout/Logo";
 import { SiteSearch } from "@/components/layout/SiteSearch";
-import { PhoneIcon, StaffIcon, WhatsAppIcon } from "@/components/ui/Icons";
+import { CloseIcon, PhoneIcon, StaffIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { clinic } from "@/content/clinic";
 import { telHref, whatsappHref } from "@/lib/clinic-facts";
 import { isNavActive, primaryNav } from "@/lib/navigation";
 
 export function Header() {
   const pathname = usePathname();
+  const drawerTitleId = useId();
   const [open, setOpen] = useState(false);
   const [openPath, setOpenPath] = useState(pathname);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   if (pathname !== openPath) {
     setOpenPath(pathname);
     setOpen(false);
   }
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -44,10 +52,9 @@ export function Header() {
     const previouslyFocused = toggleRef.current;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
 
     const selectors = 'a[href], button:not([disabled])';
-    const items = panel ? Array.from(panel.querySelectorAll<HTMLElement>(selectors)) : [];
-    items[0]?.focus();
 
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -82,8 +89,82 @@ export function Header() {
 
   if (onStaffRoute) return null;
 
+  const drawer =
+    open && mounted
+      ? createPortal(
+          <div className="mobile-nav-layer" role="presentation">
+            <button
+              type="button"
+              className="mobile-nav-scrim"
+              tabIndex={-1}
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+            />
+            <div
+              id="mobile-navigation"
+              ref={panelRef}
+              className="mobile-nav"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={drawerTitleId}
+            >
+              <div className="mobile-nav-top">
+                <p id={drawerTitleId} className="mobile-nav-label">
+                  Menu
+                </p>
+                <button
+                  ref={closeRef}
+                  type="button"
+                  className="mobile-nav-close"
+                  aria-label="Close menu"
+                  onClick={() => setOpen(false)}
+                >
+                  <CloseIcon />
+                </button>
+              </div>
+              <nav aria-label="Mobile">
+                <ul>
+                  {primaryNav.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="mobile-link"
+                        aria-current={isNavActive(pathname, item) ? "page" : undefined}
+                        onClick={() => setOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="mobile-quick">
+                <Link href="/staff/login" className="btn btn-secondary" onClick={() => setOpen(false)}>
+                  Staff login
+                </Link>
+                {callHref ? (
+                  <a className="btn btn-secondary" href={callHref}>
+                    Call
+                  </a>
+                ) : null}
+                {whatsapp ? (
+                  <a className="btn btn-whatsapp" href={whatsapp} target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ) : null}
+              </div>
+              <Link href="/book" className="btn btn-primary mobile-book" onClick={() => setOpen(false)}>
+                Book an appointment
+              </Link>
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
+
   return (
-    <header className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
+    <header className={`site-header${mounted && scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
       <div className="header-inner">
         <Logo />
         <div className="header-nav-cluster">
@@ -142,51 +223,7 @@ export function Header() {
           <span className="menu-bars" aria-hidden="true" />
         </button>
       </div>
-      {open ? (
-        <div
-          id="mobile-navigation"
-          ref={panelRef}
-          className="mobile-nav"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-        >
-          <nav aria-label="Mobile">
-            <ul>
-              {primaryNav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="mobile-link"
-                    aria-current={isNavActive(pathname, item) ? "page" : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className="mobile-quick">
-            <Link href="/staff/login" className="btn btn-secondary">
-              Staff login
-            </Link>
-            {callHref ? (
-              <a className="btn btn-secondary" href={callHref}>
-                Call
-              </a>
-            ) : null}
-            {whatsapp ? (
-              <a className="btn btn-whatsapp" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                WhatsApp
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            ) : null}
-          </div>
-          <Link href="/book" className="btn btn-primary mobile-book">
-            Book an appointment
-          </Link>
-        </div>
-      ) : null}
+      {drawer}
     </header>
   );
 }

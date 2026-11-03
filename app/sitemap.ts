@@ -25,7 +25,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...new Set(paths)].map((path) => ({
     url: `${base}${path}`,
-    changeFrequency: "monthly",
-    priority: path === "/" ? 1 : 0.7,
+    lastModified: new Date(),
+    changeFrequency: path === "/" || path.startsWith("/services") ? "weekly" : "monthly",
+    priority: sitemapPriority(path),
   }));
+}
+
+function sitemapPriority(path: string): number {
+  if (path === "/") return 1;
+  if (path === "/services" || path.startsWith("/services/")) return 0.9;
+  if (path === "/contact" || path === "/book" || path === "/about") return 0.8;
+  if (path === "/privacy" || path === "/terms" || path === "/accessibility") return 0.3;
+  return 0.6;
 }

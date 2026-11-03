@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { submitCallbackRequest } from "@/app/book/actions";
 import { clinic } from "@/content/clinic";
-import { PhoneIcon, WhatsAppIcon } from "@/components/ui/Icons";
+import { CloseIcon, PhoneIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { telHref, whatsappHref } from "@/lib/clinic-facts";
 import { emptyCallback, validateCallback, type CallbackErrors, type CallbackValues } from "@/lib/validation";
 
@@ -160,13 +160,21 @@ function CallbackDialog({ onClose }: { onClose: () => void }) {
         ref={panelRef}
       >
         <button className="callback-close" type="button" onClick={onClose} ref={closeRef} aria-label="Close">
-          ×
+          <CloseIcon />
         </button>
         {terminal ? (
-          <div className="callback-result">
+          <div className={`callback-result${state?.status === "delivered" ? " is-thanks" : ""}`}>
+            {state?.status === "delivered" ? (
+              <div className="thank-you-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </div>
+            ) : null}
+            <p className="eyebrow">{state?.status === "delivered" ? "Thank you" : "Not sent"}</p>
             <h2 id={titleId}>
               {state?.status === "delivered"
-                ? "Your callback request has reached the clinic."
+                ? "We will call you back."
                 : "The clinic has not received this yet."}
             </h2>
             <p>{state?.message}</p>

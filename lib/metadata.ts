@@ -1,43 +1,50 @@
 import type { Metadata } from "next";
 import { clinic } from "@/content/clinic";
-import { isPublishable, siteUrl } from "@/lib/clinic-facts";
+import { isPublishable, plainText, siteUrl } from "@/lib/clinic-facts";
 
 type PageMetaInput = {
   title: string;
   description: string;
   path: string;
   absoluteTitle?: boolean;
+  noIndex?: boolean;
 };
 
-export function pageMeta({ title, description, path, absoluteTitle = false }: PageMetaInput): Metadata {
-  const publishable = isPublishable();
-  const fullTitle = absoluteTitle ? title : `${title} | ${clinic.name}`;
+const shareImage = "/brand/logo-mark.jpg";
+
+export function pageMeta({ title, description, path, absoluteTitle = false, noIndex = false }: PageMetaInput): Metadata {
+  const publishable = isPublishable() && !noIndex;
+  const cleanTitle = plainText(title);
+  const cleanDescription = plainText(description);
+  const fullTitle = absoluteTitle ? cleanTitle : `${cleanTitle} | ${clinic.name}`;
 
   return {
-    title: absoluteTitle ? { absolute: title } : title,
-    description,
+    title: absoluteTitle ? { absolute: cleanTitle } : cleanTitle,
+    description: cleanDescription,
     alternates: { canonical: path },
     robots: publishable
       ? { index: true, follow: true }
       : { index: false, follow: false, nocache: true },
     openGraph: {
       title: fullTitle,
-      description,
+      description: cleanDescription,
       url: path,
       siteName: clinic.name,
-      locale: "en",
+      locale: "en_IN",
       type: "website",
+      images: [{ url: shareImage, alt: clinic.name }],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: fullTitle,
-      description,
+      description: cleanDescription,
+      images: [shareImage],
     },
   };
 }
 
 export function rootMetadata(): Metadata {
-  const description = clinic.hero.description;
+  const description = plainText(clinic.hero.description);
   return {
     metadataBase: new URL(siteUrl()),
     title: {
@@ -53,13 +60,15 @@ export function rootMetadata(): Metadata {
       title: `${clinic.name} | Patient-centred healthcare`,
       description,
       siteName: clinic.name,
-      locale: "en",
+      locale: "en_IN",
       type: "website",
+      images: [{ url: shareImage, alt: clinic.name }],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: `${clinic.name} | Patient-centred healthcare`,
       description,
+      images: [shareImage],
     },
   };
 }

@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { deleteInboxItem, logoutStaff } from "@/app/staff/actions";
+import { StaffPasswordForm } from "@/components/staff/StaffPasswordForm";
 import { clinic } from "@/content/clinic";
 import { formatDisplayDate } from "@/lib/dates";
 import type { AppointmentRecord, CallbackRecord, CareerRecord } from "@/lib/staff-inbox";
 import { careerExperienceLabel, careerRoleLabel, timeLabel } from "@/lib/validation";
 
 type Tab = "appointments" | "careers" | "callbacks";
+type DeskView = "inbox" | "password";
 
 function serviceName(slug: string) {
   return clinic.services.find((item) => item.slug === slug)?.name || slug || "Not specified";
@@ -71,40 +73,70 @@ export function StaffDashboard({
   callbacks: CallbackRecord[];
 }) {
   const [tab, setTab] = useState<Tab>("appointments");
+  const [view, setView] = useState<DeskView>("inbox");
 
   return (
     <div className="staff-shell">
       <header className="staff-topbar">
         <div>
           <p className="eyebrow">Staff desk</p>
-          <h1>Maximum Healthcare inbox</h1>
+          <h1>{view === "password" ? "Account security" : "Maximum Healthcare inbox"}</h1>
           <p>Signed in as {username}</p>
         </div>
-        <form action={logoutStaff}>
-          <button type="submit" className="btn btn-secondary">
-            Sign out
-          </button>
-        </form>
+        <div className="staff-topbar-actions">
+          {view === "inbox" ? (
+            <button type="button" className="btn btn-secondary" onClick={() => setView("password")}>
+              Change password
+            </button>
+          ) : (
+            <button type="button" className="btn btn-secondary" onClick={() => setView("inbox")}>
+              Back to inbox
+            </button>
+          )}
+          <form action={logoutStaff}>
+            <button type="submit" className="btn btn-secondary">
+              Sign out
+            </button>
+          </form>
+        </div>
       </header>
 
-      <div className="staff-summary">
-        <button type="button" className={`staff-stat${tab === "appointments" ? " is-active" : ""}`} onClick={() => setTab("appointments")}>
-          <span>Appointments</span>
-          <strong>{appointments.length}</strong>
-        </button>
-        <button type="button" className={`staff-stat${tab === "careers" ? " is-active" : ""}`} onClick={() => setTab("careers")}>
-          <span>Career applications</span>
-          <strong>{careers.length}</strong>
-        </button>
-        <button type="button" className={`staff-stat${tab === "callbacks" ? " is-active" : ""}`} onClick={() => setTab("callbacks")}>
-          <span>Callback requests</span>
-          <strong>{callbacks.length}</strong>
-        </button>
-      </div>
+      {view === "password" ? (
+        <StaffPasswordForm onCancel={() => setView("inbox")} />
+      ) : (
+        <>
+          <div className="staff-summary">
+            <button
+              type="button"
+              className={`staff-stat${tab === "appointments" ? " is-active" : ""}`}
+              onClick={() => setTab("appointments")}
+            >
+              <span>Appointments</span>
+              <strong>{appointments.length}</strong>
+            </button>
+            <button
+              type="button"
+              className={`staff-stat${tab === "careers" ? " is-active" : ""}`}
+              onClick={() => setTab("careers")}
+            >
+              <span>Career applications</span>
+              <strong>{careers.length}</strong>
+            </button>
+            <button
+              type="button"
+              className={`staff-stat${tab === "callbacks" ? " is-active" : ""}`}
+              onClick={() => setTab("callbacks")}
+            >
+              <span>Callback requests</span>
+              <strong>{callbacks.length}</strong>
+            </button>
+          </div>
 
-      {tab === "appointments" ? <AppointmentsPanel items={appointments} /> : null}
-      {tab === "careers" ? <CareersPanel items={careers} /> : null}
-      {tab === "callbacks" ? <CallbacksPanel items={callbacks} /> : null}
+          {tab === "appointments" ? <AppointmentsPanel items={appointments} /> : null}
+          {tab === "careers" ? <CareersPanel items={careers} /> : null}
+          {tab === "callbacks" ? <CallbacksPanel items={callbacks} /> : null}
+        </>
+      )}
     </div>
   );
 }

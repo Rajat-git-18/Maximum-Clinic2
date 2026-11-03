@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { clinic } from "@/content/clinic";
 import { whatsappHref } from "@/lib/clinic-facts";
 
@@ -10,8 +11,12 @@ export function FinalCta() {
     <section className="final-cta band-dark" aria-labelledby="final-cta-heading">
       <Container>
         <p className="eyebrow">{clinic.finalCta.eyebrow}</p>
-        <h2 id="final-cta-heading">{clinic.finalCta.title}</h2>
-        <p className="lede">{clinic.finalCta.body}</p>
+        <h2 id="final-cta-heading">
+          <EmphasizedText text={clinic.finalCta.title} />
+        </h2>
+        <p className="lede">
+          <EmphasizedText text={clinic.finalCta.body} />
+        </p>
         <div className="cta-row">
           <Button href="/book" variant="inverse">
             {clinic.finalCta.cta}

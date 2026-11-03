@@ -4,11 +4,13 @@ import { Logo } from "@/components/layout/Logo";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { clinic } from "@/content/clinic";
 import { WhatsAppIcon } from "@/components/ui/Icons";
-import { locationLabel, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
+import { clinicLocationLabels, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
 import { policyNav, primaryNav } from "@/lib/navigation";
 
 export function Footer() {
   const maps = mapsHref();
+  const email = mailtoHref(clinic.email);
+  const locations = clinicLocationLabels();
 
   return (
     <footer className="site-footer">
@@ -42,13 +44,20 @@ export function Footer() {
         <div>
           <p className="footer-label">Contact</p>
           <ul className="footer-links">
-            <li>{locationLabel()}</li>
+            {locations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
             {clinic.phones.map((item) => {
               const href = telHref(item.e164);
               return (
                 <li key={item.e164}>{href ? <a href={href}>{item.display}</a> : item.display}</li>
               );
             })}
+            {email ? (
+              <li>
+                <a href={email}>{clinic.email}</a>
+              </li>
+            ) : null}
             {clinic.whatsappEnabled && whatsappHref(clinic.phone) ? (
               <li>
                 <a

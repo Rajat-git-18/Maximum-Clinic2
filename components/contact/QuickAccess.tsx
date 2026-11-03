@@ -23,15 +23,18 @@ export function QuickAccess() {
           aria-label="WhatsApp the clinic (opens in a new tab)"
         >
           <WhatsAppIcon />
+          <span className="quick-btn-text">WhatsApp</span>
         </a>
       ) : null}
       {call ? (
         <a className="quick-btn quick-btn-call" href={call} aria-label={`Call ${clinic.phones[0]?.display ?? "the clinic"}`}>
           <PhoneIcon />
+          <span className="sr-only">Call the clinic</span>
         </a>
       ) : null}
       <button className="quick-btn quick-btn-callback" type="button" onClick={openCallback} aria-label="Request a callback">
         <CallbackIcon />
+        <span className="sr-only">Request a callback</span>
       </button>
     </div>
   );

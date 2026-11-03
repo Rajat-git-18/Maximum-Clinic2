@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { JsonLdScript } from "@/components/seo/JsonLd";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
+import { plainText, siteUrl } from "@/lib/clinic-facts";
 
 export type Crumb = {
   href?: string;
@@ -16,8 +19,23 @@ export function PageHero({
   lede?: string;
   breadcrumb?: Crumb[];
 }) {
+  const breadcrumbData =
+    breadcrumb && breadcrumb.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumb.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: plainText(item.label),
+            ...(item.href ? { item: `${siteUrl()}${item.href}` } : {}),
+          })),
+        }
+      : null;
+
   return (
     <header className="page-hero">
+      <JsonLdScript data={breadcrumbData} />
       <div className="container">
         {breadcrumb && breadcrumb.length > 0 ? (
           <nav aria-label="Breadcrumb" className="breadcrumb">
@@ -38,8 +56,14 @@ export function PageHero({
           </nav>
         ) : null}
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <h1>{title}</h1>
-        {lede ? <p className="lede">{lede}</p> : null}
+        <h1>
+          <EmphasizedText text={title} />
+        </h1>
+        {lede ? (
+          <p className="lede">
+            <EmphasizedText text={lede} />
+          </p>
+        ) : null}
       </div>
     </header>
   );

@@ -66,16 +66,25 @@ export type PhoneNumber = {
   e164: string;
 };
 
+export type ClinicLocation = {
+  label: string;
+  street?: string;
+  locality: string;
+  region: string;
+  postalCode?: string;
+  country: string;
+};
+
 export const clinic = {
   readyToPublish: true,
   copyrightYear: "2026",
   name: "Maximum Healthcare",
   legalName: "Maximum Healthcare Pvt. Ltd.",
   speciality: "Orthopaedic clinic",
-  cityCountry: "Jammu",
+  cityCountry: "Jammu, Srinagar & Rajouri",
   phone: "+919419029200",
   phones: [{ display: "94190 29200", e164: "+919419029200" }] satisfies PhoneNumber[],
-  email: "",
+  email: "Admn.maxclinics@gmail.com",
   hours: "Monday to Saturday, 10:00 am–6:00 pm. Sunday, 9:00 am–3:30 pm.",
   hoursShort: "Mon–Sat 10 am–6 pm · Sun 9 am–3:30 pm",
   schedule: [
@@ -98,53 +107,75 @@ export const clinic = {
     postalCode: "180004",
     country: "India",
   },
+  locations: [
+    {
+      label: "Jammu",
+      street: "Gole Market, 358/A, opposite Peer Baba, Apsara Road",
+      locality: "Jammu",
+      region: "Jammu and Kashmir",
+      postalCode: "180004",
+      country: "India",
+    },
+    {
+      label: "Srinagar",
+      locality: "Srinagar",
+      region: "Jammu and Kashmir",
+      country: "India",
+    },
+    {
+      label: "Rajouri",
+      locality: "Rajouri",
+      region: "Jammu and Kashmir",
+      country: "India",
+    },
+  ] satisfies ClinicLocation[],
   parking: "",
   publicTransport: "",
   emergencyNote:
     "If you need emergency medical help, contact your local emergency number. This website cannot provide urgent or emergency care.",
   footerSummary:
-    "Maximum Healthcare Pvt. Ltd. An orthopaedic clinic in Jammu.",
+    "Maximum Healthcare Pvt. Ltd. Orthopaedic care in Jammu, Srinagar, and Rajouri.",
   hero: {
-    eyebrow: "Orthopaedic clinic · Jammu",
+    eyebrow: "Orthopaedic clinic · Jammu, Srinagar & Rajouri",
     title: "Healthcare that puts you first.",
     description:
-      "Quality-driven, ethical, and patient-centric orthopaedic care in Jammu. Explore the services, hours, and how to plan a visit.",
+      "Quality-driven, ethical, and patient-centric orthopaedic care across Jammu, Srinagar, and Rajouri. Explore the services, hours, and how to plan a visit.",
     primaryCta: "Book an appointment",
     secondaryCta: "Explore our services",
   },
   finalCta: {
     eyebrow: "Appointments",
     title: "Take the next step towards better-informed care.",
-    body: "Call the clinic, or send an appointment request. The clinic confirms the time with you. The form itself does not reserve a visit.",
+    body: "Call the clinic, or send an **appointment request**. The clinic confirms the time with you. The form itself does not reserve a visit.",
     cta: "Book an appointment",
   },
   about: {
     eyebrow: "About us",
     title: "Advanced Orthopaedic & Musculoskeletal Care in Jammu",
-    lede: "Restoring Mobility. Relieving Pain. Rebuilding Lives.",
+    lede: "**Restoring Mobility.** Relieving Pain. **Rebuilding Lives.**",
     specialtiesTitle: "Clinical specialties & services",
     paragraphs: [
-      "Located in the heart of Gandhi Nagar, Maximum Healthcare (operated by Maximum Healthcare Pvt. Ltd.) is a specialised clinic dedicated to comprehensive orthopaedic and joint wellness. We combine clinical excellence with a patient-first approach to help you return to a pain-free, active life.",
-      "From non-invasive joint therapies and specialised spine management to comprehensive arthritis, foot, and ankle treatments, our facility delivers ethical, evidence-based medical care tailored to your recovery needs.",
+      "Located in the heart of Gandhi Nagar, **Maximum Healthcare** (operated by Maximum Healthcare Pvt. Ltd.) is a specialised clinic dedicated to comprehensive **orthopaedic** and joint wellness. We combine clinical excellence with a **patient-first** approach to help you return to a pain-free, active life.",
+      "From non-invasive joint therapies and specialised **spine management** to comprehensive **arthritis**, foot, and ankle treatments, our facility delivers ethical, **evidence-based** medical care tailored to your recovery needs.",
     ],
   },
   quality: {
     eyebrow: "Quality, Accreditation & Professional Excellence",
     title: "Our Accreditations & Affiliations",
     intro:
-      "Maximum Healthcare Pvt. Ltd. is committed to delivering quality-driven, ethical and patient-centric healthcare services.",
-    body: "Our organisation takes pride in its affiliations and accreditations with NABH (National Accreditation Board for Hospitals & Healthcare Providers), NABL (National Accreditation Board for Testing and Calibration Laboratories), and the Arthritis Foundation of India.",
+      "Maximum Healthcare Pvt. Ltd. is committed to delivering **quality-driven**, ethical and **patient-centric** healthcare services.",
+    body: "Our organisation takes pride in its affiliations and accreditations with **NABH** (National Accreditation Board for Hospitals & Healthcare Providers), **NABL** (National Accreditation Board for Testing and Calibration Laboratories), and the **Arthritis Foundation of India**.",
     associations:
-      "These associations reflect our commitment to maintaining high standards of clinical care, patient safety, diagnostic quality, continuous improvement and professional excellence.",
-    tagline: "At Maximum Healthcare, quality is not just a standard; it is our commitment to every patient.",
+      "These associations reflect our commitment to maintaining high standards of **clinical care**, **patient safety**, diagnostic quality, continuous improvement and professional excellence.",
+    tagline: "At **Maximum Healthcare**, quality is not just a standard; it is our commitment to every patient.",
   },
   careers: {
     eyebrow: "Careers",
     title: "Build Your Career with Maximum Healthcare",
-    lede: "Join a team dedicated to medical excellence, patient care, and compassionate healing in Jammu.",
+    lede: "Join a team dedicated to **medical excellence**, patient care, and compassionate healing in Jammu.",
     paragraphs: [
-      "At Maximum Healthcare Pvt. Ltd., we look for medical professionals, administrative staff, and healthcare personnel who share our commitment to patient-first care.",
-      "Even if no vacancies are listed, we welcome talent to connect with us. Candidate profiles are reviewed for upcoming opportunities across specialised departments in Gandhi Nagar, Jammu.",
+      "At Maximum Healthcare Pvt. Ltd., we look for medical professionals, administrative staff, and healthcare personnel who share our commitment to **patient-first** care.",
+      "Even if no vacancies are listed, we welcome talent to connect with us. Candidate profiles are reviewed for upcoming opportunities across specialised departments in **Gandhi Nagar, Jammu**.",
     ],
     stepsTitle: "How the talent network form works",
     steps: [
@@ -163,40 +194,41 @@ export const clinic = {
     ],
     contact: {
       title: "Direct inquiries",
-      location: "Jammu (180004)",
+      location: "Jammu, Srinagar & Rajouri",
       phoneLabel: "Direct HR / Recruitment contact",
+      emailLabel: "Email",
       note: "For urgent recruitment queries or direct applications, contact the administrative desk during operational hours.",
     },
   },
   videos: {
     eyebrow: "Videos",
     title: "Patient Education & Clinical Insights",
-    lede: "Explore how we approach specialised Spine Care and Arthritis Treatment at Maximum Healthcare, Gandhi Nagar.",
+    lede: "Explore how we approach specialised **Spine Care** and **Arthritis Treatment** at Maximum Healthcare, Gandhi Nagar.",
     heading: "About these films",
     phone: { display: "94190 29200", e164: "+919419029200" } satisfies PhoneNumber,
     home: {
       title: "Spine care at Maximum Healthcare.",
-      lede: "A short film supplied by Maximum Healthcare. It introduces how the practice presents spine care. It does not diagnose, and it does not book an appointment.",
+      lede: "A short film supplied by Maximum Healthcare. It introduces how the practice presents **spine care**. It does not diagnose, and it does not book an appointment.",
       paragraphs: [
-        "Maximum Healthcare is in Gandhi Nagar, Jammu. This film is published so patients and families can see how the practice talks about spine care.",
-        "Open the videos page to watch the arthritis care film as well. For questions, call 94190 29200.",
+        "Maximum Healthcare is in **Gandhi Nagar, Jammu**. This film is published so patients and families can see how the practice talks about spine care.",
+        "Open the videos page to watch the arthritis care film as well. For questions, call **94190 29200**.",
       ],
     },
     paragraphs: [
-      "We believe an informed patient is an empowered patient. These short videos offer an exclusive glimpse into our clinic environment, patient care philosophy, and modern approaches to spine and joint health.",
-      "Designed to introduce our practice to patients and their families, these insights help you understand what to expect before your visit to our Jammu centre.",
+      "We believe an **informed patient** is an empowered patient. These short videos offer an exclusive glimpse into our clinic environment, patient care philosophy, and modern approaches to **spine and joint health**.",
+      "Designed to introduce our practice to patients and their families, these insights help you understand what to expect before your visit to our **Jammu centre**.",
     ],
     noteTitle: "Medical note",
     note: "These videos are provided for educational and introductory purposes only and do not replace an in-person medical evaluation. Individual treatment plans depend on a thorough consultation with our specialists.",
     questionsTitle: "Have questions about what you watched?",
     questions:
-      "Call our medical helpdesk directly at +91 94190 29200 or schedule an in-person consultation at our Gandhi Nagar clinic.",
+      "Call our medical helpdesk directly at **+91 94190 29200** or schedule an in-person consultation at our Gandhi Nagar clinic.",
     items: [
       {
         slug: "spine-care",
         kicker: "Film 01",
         title: "Specialised Spine Care & Rehabilitation",
-        lede: "A visual overview of non-surgical spine management, posture correction, and back pain treatment options available at the clinic.",
+        lede: "A visual overview of **non-surgical spine management**, posture correction, and back pain treatment options available at the clinic.",
         src: "/media/spine-care.mp4",
         poster: "/media/spine-care.jpg",
       },
@@ -204,7 +236,7 @@ export const clinic = {
         slug: "arthritis-care",
         kicker: "Film 02",
         title: "Advanced Arthritis & Joint Wellness",
-        lede: "Understanding joint care, arthritis management, and mobility restoration techniques tailored for long-term relief.",
+        lede: "Understanding joint care, **arthritis management**, and mobility restoration techniques tailored for long-term relief.",
         src: "/media/arthritis-care.mp4",
         poster: "/media/arthritis-care.jpg",
       },
@@ -213,7 +245,7 @@ export const clinic = {
   galleryPage: {
     eyebrow: "Gallery",
     title: "Inside Maximum Healthcare.",
-    lede: "Clinic-supplied photographs of the waiting lounge, entrance, walkway, and consultation rooms in Jammu.",
+    lede: "Clinic-supplied photographs of the waiting lounge, entrance, walkway, and consultation rooms in **Jammu**.",
     paragraphs: [
       "These photographs were supplied by Maximum Healthcare. They show the premises as they looked when the pictures were taken, not a live view of who is in the clinic today.",
       "Call before you visit if you need to know about access, parking, or which door to use.",
@@ -240,22 +272,22 @@ export const clinic = {
     {
       kicker: "Location",
       title: "Prime Jammu location",
-      body: "Centrally located at Gole Market, opposite Peer Baba, Apsara Road, Jammu, with easy access and parking.",
+      body: "Centrally located at **Gole Market**, opposite Peer Baba, Apsara Road, Jammu, with easy access and parking.",
     },
     {
       kicker: "Hours",
       title: "Flexible hours",
-      body: "Open seven days a week. Monday to Saturday, 10:00 am–6:00 pm. Sunday, 9:00 am–3:30 pm.",
+      body: "Open **seven days a week**. Monday to Saturday, 10:00 am–6:00 pm. Sunday, 9:00 am–3:30 pm.",
     },
     {
       kicker: "Support",
       title: "Direct clinic support",
-      body: "Phone assistance for queries and consultations at 94190 29200.",
+      body: "Phone assistance for queries and consultations at **94190 29200**.",
     },
     {
       kicker: "Booking",
       title: "Hassle-free booking",
-      body: "Request an appointment online. The team calls back to confirm your visit time. The form itself does not reserve a slot.",
+      body: "Request an appointment online. The team calls back to **confirm your visit time**. The form itself does not reserve a slot.",
     },
   ],
   journey: [
@@ -267,12 +299,12 @@ export const clinic = {
     {
       number: "02",
       title: "Call or send a request",
-      body: "Call 94190 29200, or send a preferred day and part of the day. The request does not reserve that time.",
+      body: "Call **94190 29200**, or send a preferred day and part of the day. The request does not reserve that time.",
     },
     {
       number: "03",
       title: "Visit the clinic",
-      body: "Use the published address and hours before you travel. Ask the clinic what to bring when the visit is confirmed.",
+      body: "Use the published **address and hours** before you travel. Ask the clinic what to bring when the visit is confirmed.",
     },
     {
       number: "04",
@@ -363,9 +395,9 @@ export const clinic = {
       name: "Bone & Joint Care",
       pageTitle: "Advanced Bone & Joint Care",
       summary:
-        "Comprehensive diagnostics, non-surgical therapies, and surgical solutions for long-term mobility.",
+        "Comprehensive diagnostics, **non-surgical therapies**, and surgical solutions for long-term mobility.",
       paragraphs: [
-        "At Maximum Healthcare, we provide tailored treatment plans for a wide range of musculoskeletal conditions. From precision diagnostics to specialized joint preservation and post-injury care, our focus is on relieving pain and restoring your active lifestyle.",
+        "At Maximum Healthcare, we provide tailored treatment plans for a wide range of **musculoskeletal** conditions. From precision diagnostics to specialised **joint preservation** and post-injury care, our focus is on relieving pain and restoring your active lifestyle.",
       ],
       icon: "joint",
       procedures: [
@@ -391,7 +423,7 @@ export const clinic = {
         },
         {
           title: "Elbow & Forearm Conditions",
-          body: "Specialized care for tennis elbow, joint inflammation, and nerve compression.",
+          body: "Specialised care for tennis elbow, joint inflammation, and nerve compression.",
         },
         {
           title: "Advanced Fracture Management",
@@ -409,9 +441,9 @@ export const clinic = {
       slug: "spine-care",
       name: "Spine Care & Rehabilitation",
       summary:
-        "Advanced diagnostics, non-surgical relief, and expert care for chronic back pain, herniated discs, and spinal health.",
+        "Advanced diagnostics, **non-surgical relief**, and expert care for chronic back pain, herniated discs, and spinal health.",
       paragraphs: [
-        "Back and spine conditions require precise evaluation and specialized care. At Maximum Healthcare, we focus on relieving chronic discomfort, correcting spinal alignment, and restoring your freedom of movement through targeted medical interventions and rehabilitation.",
+        "Back and spine conditions require precise evaluation and specialised care. At Maximum Healthcare, we focus on relieving chronic discomfort, correcting **spinal alignment**, and restoring your freedom of movement through targeted medical interventions and rehabilitation.",
       ],
       icon: "spine",
       offeringsTitle: "Core specialties and treatments",
@@ -447,7 +479,7 @@ export const clinic = {
         },
         {
           title: "Spine Trauma & Injury Care",
-          body: "Prompt medical assessment and stabilization for acute spinal injuries.",
+          body: "Prompt medical assessment and stabilisation for acute spinal injuries.",
         },
       ],
       guidance:
@@ -458,9 +490,9 @@ export const clinic = {
       name: "Arthritis Treatment",
       pageTitle: "Arthritis & Joint Wellness Care",
       summary:
-        "Evidence-based medical management to relieve joint pain, restore flexibility, and protect your long-term mobility.",
+        "**Evidence-based** medical management to relieve joint pain, restore flexibility, and protect your long-term mobility.",
       paragraphs: [
-        "Chronic joint pain and inflammation shouldn't limit your daily life. At Maximum Healthcare, we deliver personalized, evidence-based treatment plans tailored to slow joint degeneration, manage inflammation, and help you live an active, pain-free life.",
+        "Chronic joint pain and inflammation should not limit your daily life. At Maximum Healthcare, we deliver personalised, **evidence-based** treatment plans tailored to slow joint degeneration, manage inflammation, and help you live an active, pain-free life.",
       ],
       icon: "arthritis",
       offeringsTitle: "Core conditions and advanced therapies",
@@ -488,7 +520,7 @@ export const clinic = {
         },
         {
           title: "Juvenile Arthritis Support",
-          body: "Specialized, compassionate evaluation and management tailored for young patients.",
+          body: "Specialised, compassionate evaluation and management tailored for young patients.",
         },
         {
           title: "Holistic Arthritis Management",
@@ -507,12 +539,12 @@ export const clinic = {
       name: "Foot & Ankle Care",
       pageTitle: "Advanced Foot & Ankle Care",
       summary:
-        "Targeted treatment plans for alignment correction, sports injuries, and long-term mobility support.",
+        "Targeted treatment plans for **alignment correction**, sports injuries, and long-term mobility support.",
       paragraphs: [
-        "Your feet and ankles carry the weight of your daily life. At Maximum Healthcare, we provide specialized care to correct structural alignment issues, treat traumatic or sports-related injuries, and eliminate heel and foot pain so you can walk with confidence.",
+        "Your feet and ankles carry the weight of your daily life. At Maximum Healthcare, we provide specialised care to correct structural alignment issues, treat traumatic or sports-related injuries, and eliminate heel and foot pain so you can walk with confidence.",
       ],
       icon: "foot",
-      offeringsTitle: "Core conditions and specialized treatments",
+      offeringsTitle: "Core conditions and specialised treatments",
       callLabel: "Call Clinic",
       procedures: [
         "Ankle Sprain & Ligament Recovery",
@@ -529,7 +561,7 @@ export const clinic = {
         },
         {
           title: "Flat Foot & Alignment Correction",
-          body: "Customized orthotic guidance and therapeutic care for arch support and gait alignment.",
+          body: "Customised orthotic guidance and therapeutic care for arch support and gait alignment.",
         },
         {
           title: "Heel Pain & Plantar Fasciitis",
@@ -537,11 +569,11 @@ export const clinic = {
         },
         {
           title: "Foot Deformity Management",
-          body: "Specialized clinical evaluation for structural foot conditions and corrective care.",
+          body: "Specialised clinical evaluation for structural foot conditions and corrective care.",
         },
         {
           title: "Athletic & Sports Injury Care",
-          body: "Rapid recovery plans for tendon strain, Achilles tendonitis, and sports-related foot trauma.",
+          body: "Rapid recovery plans for tendon strain, Achilles tendinitis, and sports-related foot trauma.",
         },
         {
           title: "Bunions & Toe Condition Relief",
@@ -549,7 +581,7 @@ export const clinic = {
         },
       ],
       guidance:
-        "Treatment duration, specialized orthotic solutions, and procedure costs are determined after a thorough clinical assessment. Contact our helpdesk for specific inquiries.",
+        "Treatment duration, specialised orthotic solutions, and procedure costs are determined after a thorough clinical assessment. Contact our helpdesk for specific inquiries.",
     },
   ] satisfies Service[],
   testimonials: [] as Testimonial[],
@@ -561,7 +593,7 @@ export function getFaqs() {
     {
       question: "How can I book an appointment?",
       answer:
-        `Call ${numbers}, or submit an appointment request online with your preferred day and part of the day. Our team reviews every request and calls you back to confirm a suitable visit time.`,
+        `Call **${numbers}**, or submit an **appointment request** online with your preferred day and part of the day. Our team reviews every request and calls you back to confirm a suitable visit time.`,
     },
     {
       question: "What are the clinic's opening hours?",
@@ -570,21 +602,21 @@ export function getFaqs() {
     {
       question: "Where is the clinic located?",
       answer:
-        "Maximum Healthcare is at Gole Market, 358/A, opposite Peer Baba, Apsara Road, Gandhi Nagar, Jammu, Jammu and Kashmir 180004. Use the directions link on the Contact page for Google Maps guidance.",
+        "Maximum Healthcare serves **Jammu, Srinagar, and Rajouri**. The Jammu centre is at **Gole Market, 358/A**, opposite Peer Baba, Apsara Road, Gandhi Nagar, Jammu, Jammu and Kashmir 180004. Use the Contact page for directions and to reach the team about Srinagar or Rajouri visits.",
     },
     {
       question: "What services are available?",
       answer:
-        "We provide bone and joint care, spine care and rehabilitation, arthritis treatment, and foot and ankle care. When you call or send a request, our team can guide you to the most suitable consultation.",
+        "We provide **bone and joint care**, **spine care and rehabilitation**, **arthritis treatment**, and **foot and ankle care**. When you call or send a request, our team can guide you to the most suitable consultation.",
     },
     {
       question: "What should I bring to my first visit?",
       answer:
-        "Please bring a government-issued ID, any previous reports or imaging related to your concern, a list of current medicines, and referral or insurance papers if you have them. Our team can confirm any additional requirements when your visit is arranged.",
+        "Please bring a **government-issued ID**, any previous reports or imaging related to your concern, a list of current medicines, and referral or insurance papers if you have them. Our team can confirm any additional requirements when your visit is arranged.",
     },
     {
       question: "How can I reschedule an appointment?",
-      answer: `To reschedule or cancel a confirmed visit, please call ${numbers} and share the appointment details already confirmed with you. Our administrative team will help you arrange a new time.`,
+      answer: `To reschedule or cancel a confirmed visit, please call **${numbers}** and share the appointment details already confirmed with you. Our administrative team will help you arrange a new time.`,
     },
     {
       question: "Which payment methods are accepted?",
@@ -593,27 +625,27 @@ export function getFaqs() {
     },
     {
       question: "How can I contact the clinic?",
-      answer: `Call ${numbers} during operational hours. You can also use the Contact page for directions and for our Instagram and Facebook links.`,
+      answer: `Call **${numbers}** during operational hours, or email **${clinic.email}**. You can also use the Contact page for directions and for our Instagram and Facebook links.`,
     },
     {
       question: "What accreditations does the clinic hold?",
       answer:
-        "Maximum Healthcare Pvt. Ltd. maintains affiliations and accreditations with NABH, NABL, and the Arthritis Foundation of India. Full details are available on the About page.",
+        "Maximum Healthcare Pvt. Ltd. maintains affiliations and accreditations with **NABH**, **NABL**, and the **Arthritis Foundation of India**. Full details are available on the About page.",
     },
     {
       question: "Are there jobs at the clinic?",
       answer:
-        "We welcome applications of interest through the Careers page. Share your details with our team, and we will review your profile for suitable openings across our departments.",
+        "We welcome applications of interest through the **Careers** page. Share your details with our team, and we will review your profile for suitable openings across our departments.",
     },
     {
       question: "Are there videos of the clinic?",
       answer:
-        "Yes. Educational films on spine care and arthritis care are available on the Videos page. They introduce our approach and support patient understanding before a consultation.",
+        "Yes. Educational films on **spine care** and **arthritis care** are available on the Videos page. They introduce our approach and support patient understanding before a consultation.",
     },
     {
       question: "Can I see photographs of the rooms?",
       answer:
-        "Yes. Photographs of the waiting lounge, entrance, walkway, and consultation rooms are available on the Gallery page.",
+        "Yes. Photographs of the waiting lounge, entrance, walkway, and consultation rooms are available on the **Gallery** page.",
     },
   ];
 }

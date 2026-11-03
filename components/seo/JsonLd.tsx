@@ -1,7 +1,6 @@
 import { localBusinessJsonLd } from "@/lib/clinic-facts";
 
-export function JsonLd() {
-  const data = localBusinessJsonLd();
+export function JsonLdScript({ data }: { data: object | null }) {
   if (!data) return null;
   return (
     <script
@@ -9,4 +8,8 @@ export function JsonLd() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
+}
+
+export function JsonLd() {
+  return <JsonLdScript data={localBusinessJsonLd()} />;
 }

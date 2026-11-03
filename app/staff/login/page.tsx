@@ -6,6 +6,7 @@ export const metadata = pageMeta({
   title: "Staff login",
   description: "Secure staff login for Maximum Healthcare appointment and career inbox.",
   path: "/staff/login",
+  noIndex: true,
 });
 
 function LoginFallback() {

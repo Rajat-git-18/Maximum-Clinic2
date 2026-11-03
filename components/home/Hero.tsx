@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { EmphasizedText } from "@/components/ui/EmphasizedText";
 import { IndiaFlag } from "@/components/ui/IndiaFlag";
 import { clinic } from "@/content/clinic";
 
@@ -9,8 +10,12 @@ export function Hero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">{clinic.hero.eyebrow}</p>
-          <h1 id="hero-heading">{clinic.hero.title}</h1>
-          <p className="lede">{clinic.hero.description}</p>
+          <h1 id="hero-heading">
+            <EmphasizedText text={clinic.hero.title} />
+          </h1>
+          <p className="lede">
+            <EmphasizedText text={clinic.hero.description} />
+          </p>
           <div className="cta-row">
             <Button href="/book">{clinic.hero.primaryCta}</Button>
             <Button href="#services" variant="secondary">
