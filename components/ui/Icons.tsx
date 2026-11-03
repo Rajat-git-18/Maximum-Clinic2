@@ -56,6 +56,17 @@ export function CallbackIcon() {
   );
 }
 
+export function StaffIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 12a4.2 4.2 0 1 0-4.2-4.2A4.2 4.2 0 0 0 12 12Zm0 2.2c-3.6 0-8 1.8-8 4.3V20a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-2.5-4.4-4.3-8-4.3Z"
+      />
+    </svg>
+  );
+}
+
 function JointMark() {
   return (
     <svg viewBox="0 0 64 64" aria-hidden="true">

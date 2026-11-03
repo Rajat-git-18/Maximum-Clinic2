@@ -133,15 +133,25 @@ function AppointmentSession({
   }
 
   if (terminal && state) {
-    const statusLabel =
-      state.status === "delivered" ? "Request delivered" : state.status === "rejected" ? "Not accepted" : "Not sent";
+    const delivered = state.status === "delivered";
+    const statusLabel = delivered
+      ? "Request received"
+      : state.status === "rejected"
+        ? "Not accepted"
+        : "Not sent";
     return (
       <div className="result" data-status={state.status} role="status">
         <p className="eyebrow">{statusLabel}</p>
         <h2 ref={resultRef} tabIndex={-1}>
-          {state.status === "delivered" ? "The clinic has the request." : "No appointment was booked."}
+          {delivered ? "Your request has reached the clinic." : "No appointment was booked."}
         </h2>
         <p>{state.message}</p>
+        {delivered ? (
+          <p className="result-next">
+            Please keep your phone available. Maximum Healthcare will review this request and call you back to confirm a
+            suitable visit time. Submitting the form does not reserve a slot by itself.
+          </p>
+        ) : null}
         {state.status !== "rejected" ? <Review values={values} /> : null}
         <div className="cta-row">
           <button type="button" className="btn btn-secondary" onClick={onRestart}>
@@ -420,8 +430,8 @@ function AppointmentSession({
 
         <div hidden={step !== 3}>
           <p className="field-help">
-            Check the details. Submitting sends the request only if a booking inbox is connected. It never confirms
-            the appointment by itself.
+            Check the details. Submitting sends your request to Maximum Healthcare. The clinic will call you back to
+            confirm a suitable time. This step never books a slot by itself.
           </p>
           <Review values={values} />
         </div>

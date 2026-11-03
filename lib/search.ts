@@ -44,10 +44,10 @@ export function searchIndex(): SearchHit[] {
     hit({ href: "/services", title: "Services", hint: "All specialties", kind: "page" }),
     hit({
       href: "/about",
-      title: "About the clinic",
+      title: "About Maximum Healthcare",
       hint: "The practice",
       kind: "page",
-      terms: `${clinic.legalName} quality accreditation nabh nabl arthritis foundation`,
+      terms: `${clinic.legalName} ${clinic.about.title} ${clinic.about.lede} orthopaedic musculoskeletal jammu`,
     }),
     hit({
       href: "/about",
@@ -60,9 +60,23 @@ export function searchIndex(): SearchHit[] {
     hit({
       href: "/careers",
       title: "Careers",
-      hint: "Application of interest",
+      hint: "Talent network",
       kind: "page",
-      terms: "job vacancy hiring work career application nursing physiotherapy",
+      terms: "job vacancy hiring work career application nursing physiotherapy talent network",
+    }),
+    hit({
+      href: "/videos",
+      title: "Videos",
+      hint: "Patient education",
+      kind: "page",
+      terms: "video film spine care arthritis education watch",
+    }),
+    hit({
+      href: "/gallery",
+      title: "Gallery",
+      hint: "Photographs of the rooms",
+      kind: "page",
+      terms: "gallery photo rooms waiting lounge entrance walkway consultation",
     }),
     hit({ href: "/resources", title: "Patient resources", hint: "Before a visit", kind: "page", terms: "faq questions hours" }),
     hit({

@@ -165,7 +165,9 @@ function CallbackDialog({ onClose }: { onClose: () => void }) {
         {terminal ? (
           <div className="callback-result">
             <h2 id={titleId}>
-              {state?.status === "delivered" ? "The request was delivered." : "The clinic has not received this yet."}
+              {state?.status === "delivered"
+                ? "Your callback request has reached the clinic."
+                : "The clinic has not received this yet."}
             </h2>
             <p>{state?.message}</p>
             <CallbackChannels />

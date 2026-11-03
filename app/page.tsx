@@ -1,7 +1,6 @@
 import { AboutSection } from "@/components/home/AboutSection";
 import { Accreditations } from "@/components/home/Accreditations";
 import { ContactSection } from "@/components/home/ContactSection";
-import { DoctorsSection } from "@/components/home/DoctorsSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FinalCta } from "@/components/home/FinalCta";
 import { GallerySection } from "@/components/home/GallerySection";
@@ -10,7 +9,7 @@ import { PatientJourney } from "@/components/home/PatientJourney";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { TrustStrip } from "@/components/home/TrustStrip";
-import { WhySection } from "@/components/home/WhySection";
+import { VideosSection } from "@/components/home/VideosSection";
 import { clinic } from "@/content/clinic";
 import { pageMeta } from "@/lib/metadata";
 
@@ -27,11 +26,10 @@ export default function HomePage() {
       <Hero />
       <TrustStrip />
       <ServicesSection />
-      <DoctorsSection />
       <AboutSection />
       <Accreditations />
+      <VideosSection />
       <TestimonialsSection />
-      <WhySection />
       <GallerySection />
       <PatientJourney />
       <FaqSection />

@@ -14,8 +14,8 @@ export function FaqSection() {
           <SectionHeading
             id="faq-heading"
             eyebrow="Questions"
-            title="Answers from what is actually published."
-            lede="Where a policy has not been confirmed, the answer says so."
+            title="Common questions about Maximum Healthcare."
+            lede="Clear answers on appointments, visits, services, and how to reach the clinic in  Jammu."
           />
           <Accordion items={faqs} />
         </div>

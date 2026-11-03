@@ -29,7 +29,7 @@ export function TestimonialsSection() {
             <p className="eyebrow">Google reviews</p>
             <h2 id="stories-heading">What patients wrote on Google.</h2>
             <p className="lede">
-              {reviews.rating} from {reviews.count} reviews on the Maximum Clinics listing. These are patient
+              {reviews.rating} from {reviews.count} reviews on Google. These are patient
               reviews, shown as written.
             </p>
             <div className="review-summary">

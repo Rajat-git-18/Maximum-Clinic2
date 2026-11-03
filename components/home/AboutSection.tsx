@@ -1,6 +1,6 @@
+import { ClinicPhoto } from "@/components/media/ClinicPhoto";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { PlaceholderMedia } from "@/components/ui/PlaceholderMedia";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { clinic } from "@/content/clinic";
 
@@ -10,23 +10,22 @@ export function AboutSection() {
       <Container>
         <div className="about-grid">
           <div>
-            <SectionHeading id="about-heading" eyebrow={clinic.about.eyebrow} title={clinic.about.title} />
+            <SectionHeading
+              id="about-heading"
+              eyebrow={clinic.about.eyebrow}
+              title={clinic.about.title}
+              lede={clinic.about.lede}
+            />
             <div className="prose">
               {clinic.about.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-            <Button href="/about" variant="secondary">
-              About the clinic
-            </Button>
+            <div className="cta-row">
+              <Button href="/about">Read more about us</Button>
+            </div>
           </div>
-          <PlaceholderMedia
-            label="Clinic interior"
-            caption="Placeholder for a photograph of the clinic. Not a picture of this practice."
-            motif="window"
-            tone="sage"
-            ratio="landscape"
-          />
+          <ClinicPhoto photo={clinic.gallery[0]} />
         </div>
       </Container>
     </section>

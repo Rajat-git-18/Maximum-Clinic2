@@ -1,77 +1,91 @@
-import Link from "next/link";
 import { LegalPage } from "@/components/layout/LegalPage";
 import { clinic } from "@/content/clinic";
 import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "Privacy policy",
-  description: `Draft privacy notice for ${clinic.name}. It describes the appointment preview and must be reviewed before publication.`,
+  description: `How ${clinic.legalName} handles personal information collected through the ${clinic.name} website.`,
   path: "/privacy",
 });
 
 export default function PrivacyPage() {
   return (
     <LegalPage
-      title="Privacy policy"
-      lede="This is a draft notice for the website, not a claim of regulatory compliance. A lawyer should review it before the clinic relies on it."
+      eyebrow="Privacy"
+      title="Privacy Policy & Data Protection Notice"
+      lede="How Maximum Healthcare Pvt. Ltd. handles personal information collected through this website."
     >
+      <h2>1. Overview &amp; scope</h2>
       <p>
-        Status: draft template, not yet adopted by the clinic. It explains what this version of the site actually
-        does.
+        At Maximum Healthcare Pvt. Ltd. (Gandhi Nagar, Jammu), we value your privacy and are committed to protecting
+        your personal information. This Privacy Notice outlines how data collected through our official website is
+        handled.
       </p>
-      <h2>Who the site is for</h2>
       <p>
-        The site publishes information about {clinic.name} and lets someone prepare an appointment request. It is not
-        a patient portal and it does not hold a medical record.
+        This website serves as an informational platform and appointment request interface. It does not store personal
+        health records (EHR) or function as a clinical patient portal.
       </p>
-      <h2>What the appointment form asks for</h2>
-      <p>The form asks only for details needed to reply about a visit:</p>
+
+      <h2>2. Information we collect</h2>
+      <p>We only request details strictly necessary to facilitate your visit or career inquiry:</p>
       <ul>
-        <li>Service</li>
-        <li>Doctor, only when the clinic has published a doctor profile</li>
-        <li>Preferred date and part of the day</li>
-        <li>Name and phone number</li>
-        <li>Email, if you choose to leave one</li>
-        <li>An optional short note</li>
+        <li>
+          <strong>Appointment requests:</strong> preferred service or specialty, preferred date and time, full name,
+          phone number, optional email address, and brief visit notes. Please avoid sharing sensitive or extensive
+          clinical history via online forms.
+        </li>
+        <li>
+          <strong>Career inquiries:</strong> full name, contact phone number, optional email, areas of professional
+          interest, qualifications, and years of experience.
+        </li>
       </ul>
-      <p>
-        Do not use the note for a detailed medical history. The form is not a secure clinical messaging system.
-      </p>
-      <h2>What the careers form asks for</h2>
-      <p>
-        The careers form asks for name, phone, optional email, a role interest, optional qualification, experience,
-        optional city, and an optional note. It is an application of interest, not a job offer, and it does not
-        accept file uploads.
-      </p>
-      <h2>What happens when you submit</h2>
-      <p>
-        If no intake inbox has been connected, the appointment, callback, and careers forms check the details and
-        then stop. Nothing is emailed, stored in a database, or saved in the browser. The confirmation on screen
-        will say that the request was not sent.
-      </p>
-      <p>
-        If the clinic later connects an intake address, the same details are sent from the server to that address
-        over HTTPS so the clinic can reply. Delivery still does not confirm an appointment. The server does not put
-        those details into analytics.
-      </p>
-      <h2>What this site does not do</h2>
+
+      <h2>3. How your information is used and transmitted</h2>
       <ul>
-        <li>It does not run advertising or analytics that receive patient details.</li>
-        <li>It does not store the appointment form in local storage.</li>
-        <li>It does not set tracking cookies.</li>
-        <li>It does not sell contact details.</li>
+        <li>
+          <strong>Communication and scheduling:</strong> information provided in our forms is used solely by our
+          administrative team to contact you, confirm appointment availability, or respond to employment inquiries.
+        </li>
+        <li>
+          <strong>Secure transmission:</strong> all submissions are transmitted securely via encrypted protocols
+          (HTTPS).
+        </li>
+        <li>
+          <strong>No third-party sharing:</strong> we do not sell, rent, trade, or share your contact details with
+          external advertising networks or data brokers.
+        </li>
+        <li>
+          <strong>Zero tracking cookies:</strong> this website does not deploy invasive tracking cookies or third-party
+          behavioral advertising scripts to harvest personal patient data.
+        </li>
       </ul>
-      <h2>How long details would be kept</h2>
+
+      <h2>4. Data security and retention</h2>
       <p>
-        This template does not keep a copy. Once an intake service is connected, the clinic must decide how long it
-        keeps request messages, who can read them, and how people can ask for a correction or deletion. Those rules
-        are not stated here because they have not been set.
+        Form submissions are handled directly by Maximum Healthcare’s administrative helpdesk for direct follow-ups.
       </p>
-      <h2>Contact</h2>
       <p>
-        The clinic has not published an email address. Privacy questions can be asked by phone. The numbers are on
-        the <Link href="/contact">contact page</Link>.
+        We do not maintain unencrypted public databases of online form requests. Patient communication records are
+        retained in accordance with standard clinical administrative practices.
       </p>
+
+      <h2>5. Privacy inquiries and contact</h2>
+      <p>
+        If you have any questions regarding your data privacy or wish to update your contact preferences, please reach
+        out to our administrative office directly:
+      </p>
+      <ul>
+        <li>
+          <strong>Facility:</strong> Maximum Healthcare Pvt. Ltd.
+        </li>
+        <li>
+          <strong>Address:</strong> Gole Market, 358/A, opp. Peer Baba, Apsara Road, Gandhi Nagar, Jammu, J&amp;K
+          180004
+        </li>
+        <li>
+          <strong>Phone assistance:</strong> <a href="tel:+919419029200">+91 94190 29200</a>
+        </li>
+      </ul>
     </LegalPage>
   );
 }

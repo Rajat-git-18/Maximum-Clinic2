@@ -68,13 +68,17 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
   }
 
   if (terminal && state) {
-    const statusLabel =
-      state.status === "delivered" ? "Application delivered" : state.status === "rejected" ? "Not accepted" : "Not sent";
+    const delivered = state.status === "delivered";
+    const statusLabel = delivered
+      ? "Application received"
+      : state.status === "rejected"
+        ? "Not accepted"
+        : "Not sent";
     return (
       <div className="result" data-status={state.status} role="status">
         <p className="eyebrow">{statusLabel}</p>
         <h2 ref={resultRef} tabIndex={-1}>
-          {state.status === "delivered" ? "The clinic has the application." : "No application was sent."}
+          {delivered ? "Your application has reached the clinic." : "No application was sent."}
         </h2>
         <p>{state.message}</p>
         {state.status !== "rejected" ? <CareerReview values={values} /> : null}
@@ -94,6 +98,11 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
 
   return (
     <form className="book-panel career-form" action={formAction} onSubmit={handleSubmit} noValidate>
+      <div className="career-form-head">
+        <p className="eyebrow">Talent network</p>
+        <h2>Share your details</h2>
+        <p>This is an application of interest. It does not offer a role or start hiring by itself.</p>
+      </div>
       {state?.status === "failed" ? (
         <div className="form-banner" role="alert">
           {state.message}
@@ -121,6 +130,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
           onChange={(event) => update("fullName", event.target.value)}
           aria-invalid={errors.fullName ? true : undefined}
           aria-describedby={errors.fullName ? `${formId}-name-error` : undefined}
+          placeholder="Your full name"
         />
         {errors.fullName ? (
           <p id={`${formId}-name-error`} className="field-error">
@@ -142,6 +152,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
             onChange={(event) => update("phone", event.target.value)}
             aria-invalid={errors.phone ? true : undefined}
             aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
+            placeholder="10-digit mobile number"
           />
           {errors.phone ? (
             <p id={`${formId}-phone-error`} className="field-error">
@@ -150,7 +161,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
           ) : null}
         </div>
         <div className={`field${errors.email ? " has-error" : ""}`}>
-          <label htmlFor={`${formId}-email`}>Email, if you have one</label>
+          <label htmlFor={`${formId}-email`}>Email</label>
           <input
             id={`${formId}-email`}
             name="email"
@@ -162,6 +173,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
             onChange={(event) => update("email", event.target.value)}
             aria-invalid={errors.email ? true : undefined}
             aria-describedby={errors.email ? `${formId}-email-error` : undefined}
+            placeholder="Optional"
           />
           {errors.email ? (
             <p id={`${formId}-email-error`} className="field-error">
@@ -172,7 +184,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
       </div>
 
       <div className={`field${errors.role ? " has-error" : ""}`}>
-        <label htmlFor={`${formId}-role`}>Role you are interested in</label>
+        <label htmlFor={`${formId}-role`}>Preferred role</label>
         <select
           id={`${formId}-role`}
           name="role"
@@ -189,7 +201,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
           ))}
         </select>
         <p id={`${formId}-role-help`} className="field-help">
-          These are interest areas, not advertised vacancies.
+          Interest areas, not advertised vacancies.
         </p>
         {errors.role ? (
           <p id={`${formId}-role-error`} className="field-error">
@@ -212,9 +224,10 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
             aria-describedby={
               errors.qualification ? `${formId}-qualification-help ${formId}-qualification-error` : `${formId}-qualification-help`
             }
+            placeholder="Optional — BPT, GNM, MBA"
           />
-          <p id={`${formId}-qualification-help`} className="field-help">
-            Optional. Example: BPT, GNM, or MBA.
+          <p id={`${formId}-qualification-help`} className="sr-only">
+            Optional. Example: BPT, GNM, MBA.
           </p>
           {errors.qualification ? (
             <p id={`${formId}-qualification-error`} className="field-error">
@@ -248,7 +261,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
       </div>
 
       <div className={`field${errors.city ? " has-error" : ""}`}>
-        <label htmlFor={`${formId}-city`}>Current city, if you want to share it</label>
+        <label htmlFor={`${formId}-city`}>Current city</label>
         <input
           id={`${formId}-city`}
           name="city"
@@ -258,9 +271,10 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
           onChange={(event) => update("city", event.target.value)}
           aria-invalid={errors.city ? true : undefined}
           aria-describedby={errors.city ? `${formId}-city-help ${formId}-city-error` : `${formId}-city-help`}
+          placeholder="Optional"
         />
-        <p id={`${formId}-city-help`} className="field-help">
-          Optional.
+        <p id={`${formId}-city-help`} className="sr-only">
+          Optional
         </p>
         {errors.city ? (
           <p id={`${formId}-city-error`} className="field-error">
@@ -282,8 +296,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
           aria-describedby={`${formId}-note-help${errors.note ? ` ${formId}-note-error` : ""}`}
         />
         <p id={`${formId}-note-help`} className="field-help">
-          {values.note.length} / 500. Optional. Do not attach a CV here. If the clinic wants documents, they will ask
-          when they reply.
+          {values.note.length} / 500. Optional. Do not attach a CV here.
         </p>
         {errors.note ? (
           <p id={`${formId}-note-error`} className="field-error">
@@ -303,7 +316,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
             aria-invalid={errors.consent ? true : undefined}
             aria-describedby={`${formId}-consent-help`}
           />
-          <span>The clinic may use these details only to reply about this application of interest.</span>
+          <span>Maximum Healthcare may use these details only to reply about this application of interest.</span>
         </label>
         <p id={`${formId}-consent-help`} className="field-help">
           Read the <Link href="/privacy">privacy notice</Link>. Submitting does not offer you a job.
@@ -327,7 +340,7 @@ function CareerSession({ onRestart }: { onRestart: () => void }) {
 
       <div className="form-actions">
         <button type="submit" className="btn btn-primary" disabled={pending} aria-busy={pending}>
-          {pending ? "Sending application…" : "Submit application"}
+          {pending ? "Sending…" : "Submit application of interest"}
         </button>
       </div>
     </form>

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/layout/Logo";
 import { SiteSearch } from "@/components/layout/SiteSearch";
-import { PhoneIcon, WhatsAppIcon } from "@/components/ui/Icons";
+import { PhoneIcon, StaffIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { clinic } from "@/content/clinic";
 import { telHref, whatsappHref } from "@/lib/clinic-facts";
 import { isNavActive, primaryNav } from "@/lib/navigation";
@@ -32,7 +32,7 @@ export function Header() {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 1040) setOpen(false);
+      if (window.innerWidth >= 1180) setOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -78,27 +78,32 @@ export function Header() {
 
   const callHref = telHref(clinic.phone);
   const whatsapp = clinic.whatsappEnabled ? whatsappHref(clinic.phone) : null;
+  const onStaffRoute = pathname.startsWith("/staff");
+
+  if (onStaffRoute) return null;
 
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
       <div className="header-inner">
         <Logo />
-        <SiteSearch />
-        <nav className="desktop-nav" aria-label="Primary">
-          <ul>
-            {primaryNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="nav-link"
-                  aria-current={isNavActive(pathname, item) ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="header-nav-cluster">
+          <SiteSearch />
+          <nav className="desktop-nav" aria-label="Primary">
+            <ul>
+              {primaryNav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="nav-link"
+                    aria-current={isNavActive(pathname, item) ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
         <div className="header-actions">
           {whatsapp ? (
             <a
@@ -121,18 +126,21 @@ export function Header() {
             <span className="btn-full">Book an appointment</span>
             <span className="btn-short">Book</span>
           </Link>
-          <button
-            ref={toggleRef}
-            type="button"
-            className="menu-toggle"
-            aria-expanded={open}
-            aria-controls="mobile-navigation"
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <span className="menu-bars" aria-hidden="true" />
-          </button>
         </div>
+        <Link href="/staff/login" className="header-icon header-staff" aria-label="Staff login">
+          <StaffIcon />
+        </Link>
+        <button
+          ref={toggleRef}
+          type="button"
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+          <span className="menu-bars" aria-hidden="true" />
+        </button>
       </div>
       {open ? (
         <div
@@ -159,6 +167,9 @@ export function Header() {
             </ul>
           </nav>
           <div className="mobile-quick">
+            <Link href="/staff/login" className="btn btn-secondary">
+              Staff login
+            </Link>
             {callHref ? (
               <a className="btn btn-secondary" href={callHref}>
                 Call

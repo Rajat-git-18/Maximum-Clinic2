@@ -16,7 +16,7 @@ export function Accreditations() {
         <ul className="accreditation-grid">
           {clinic.accreditations.map((item) => (
             <li className="accreditation-card" key={item.id}>
-              <AccreditationMark id={item.id} />
+              <AccreditationMark id={item.id} variant="full" />
               <h3>{item.short}</h3>
               <p>{item.name}</p>
             </li>

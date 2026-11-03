@@ -17,7 +17,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Contact and location."
-        lede="Call either published number, or open directions for the Gandhi Nagar clinic. The appointment form does not confirm a visit by itself."
+        lede="Call 94190 29200, or open directions for the Jammu clinic. The appointment form does not confirm a visit by itself."
         breadcrumb={[
           { href: "/", label: "Home" },
           { label: "Contact" },

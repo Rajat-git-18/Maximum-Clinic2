@@ -10,7 +10,7 @@ export function ContactSection() {
           id="contact-heading"
           eyebrow="Contact"
           title="Find the clinic."
-          lede="Call either published number, or send an appointment request. The form does not confirm a visit by itself."
+          lede="Call 94190 29200, or send an appointment request. The form does not confirm a visit by itself."
         />
         <ContactDetails titleLevel="h3" />
       </Container>

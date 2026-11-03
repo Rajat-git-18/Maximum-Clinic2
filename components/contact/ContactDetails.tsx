@@ -85,11 +85,11 @@ export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3"
       </div>
       <div className="map-panel">
         <p className="eyebrow">Directions</p>
-        <h3>Maximum Clinics on the map</h3>
+        <h3>Maximum Healthcare on the map</h3>
         <p>The pin is the Google Maps place for this address.</p>
         <iframe
           className="map-frame"
-          title="Map of Maximum Clinics, Gandhi Nagar, Jammu"
+          title="Map of Maximum Healthcare, Jammu"
           src={clinic.mapEmbedUrl}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

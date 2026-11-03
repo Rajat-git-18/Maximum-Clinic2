@@ -56,7 +56,6 @@ export function PlaceholderMedia({
     <figure className={`media media-${ratio} tone-${tone}`}>
       <MotifSvg motif={motif} />
       <figcaption>
-        <span className="media-kicker">Placeholder</span>
         <span className="media-title">{label}</span>
         <span className="sr-only">{caption}</span>
       </figcaption>

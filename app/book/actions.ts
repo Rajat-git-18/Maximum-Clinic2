@@ -2,6 +2,7 @@
 
 import { clinic } from "@/content/clinic";
 import type { ActionResult } from "@/lib/appointment";
+import { saveInboxRecord } from "@/lib/staff-inbox";
 import {
   validateAppointment,
   validateCallback,
@@ -100,38 +101,47 @@ export async function submitAppointmentRequest(
     };
   }
 
-  const endpoint = intakeEndpoint();
-  if ("error" in endpoint && endpoint.error === "missing") {
-    return {
-      status: "not_configured",
-      message:
-        "Nothing was sent. This form is a preview because the clinic has not connected a booking inbox. No appointment has been requested or confirmed, and these details were not stored.",
-    };
-  }
-
-  if ("error" in endpoint) {
-    console.error("Appointment intake URL is missing or is not a safe https address.");
+  const submittedAt = new Date().toISOString();
+  try {
+    await saveInboxRecord({
+      type: "appointment_request",
+      submittedAt,
+      ...validated.value,
+    });
+  } catch (error) {
+    console.error("Could not save appointment request to the staff inbox.", {
+      name: error instanceof Error ? error.name : "Error",
+    });
     return {
       status: "failed",
       message:
-        "The booking intake is not configured correctly on the server. Nothing was sent and no appointment has been booked.",
+        "The request could not be saved. Nothing has been booked. Please try again, or call the clinic on a published number.",
     };
   }
 
-  return postIntake(
-    {
-      type: "appointment_request",
-      clinic: clinic.name,
-      ...validated.value,
-      submittedAt: new Date().toISOString(),
-    },
-    {
-      delivered:
-        "Your request was delivered to the clinic’s intake service. This is not a confirmed appointment. The clinic still needs to contact you to agree a time.",
-      failed:
-        "The request could not be delivered. Nothing has been booked. You can try again, or call the clinic on a published number.",
-    },
-  );
+  const endpoint = intakeEndpoint();
+  if (!("error" in endpoint)) {
+    await postIntake(
+      {
+        type: "appointment_request",
+        clinic: clinic.name,
+        ...validated.value,
+        submittedAt,
+      },
+      {
+        delivered: "",
+        failed: "",
+      },
+    );
+  } else if (endpoint.error !== "missing") {
+    console.error("Appointment intake URL is missing or is not a safe https address.");
+  }
+
+  return {
+    status: "delivered",
+    message:
+      "Your appointment request has reached Maximum Healthcare. This is not a confirmed booking yet. Our team will review your details and call you back to confirm a suitable visit time.",
+  };
 }
 
 export async function submitCallbackRequest(
@@ -179,36 +189,43 @@ export async function submitCallbackRequest(
     };
   }
 
-  const endpoint = intakeEndpoint();
-  if ("error" in endpoint && endpoint.error === "missing") {
-    return {
-      status: "not_configured",
-      message:
-        "Nothing was sent. A callback inbox is not connected yet, so the clinic has not received this request. Call a published number instead. This is not a booked appointment.",
-    };
-  }
-
-  if ("error" in endpoint) {
-    console.error("Callback intake URL is missing or is not a safe https address.");
+  const submittedAt = new Date().toISOString();
+  try {
+    await saveInboxRecord({
+      type: "callback_request",
+      submittedAt,
+      ...validated.value,
+    });
+  } catch (error) {
+    console.error("Could not save callback request to the staff inbox.", {
+      name: error instanceof Error ? error.name : "Error",
+    });
     return {
       status: "failed",
-      message: "The callback intake is not configured correctly on the server. Nothing was sent.",
+      message: "The request could not be saved. Nothing was sent. Call a published number instead.",
     };
   }
 
-  return postIntake(
-    {
-      type: "callback_request",
-      clinic: clinic.name,
-      ...validated.value,
-      submittedAt: new Date().toISOString(),
-    },
-    {
-      delivered:
-        "Your callback request was delivered. This is not a booked appointment. The clinic still needs to return the call.",
-      failed: "The request could not be delivered. Nothing was sent. Call a published number instead.",
-    },
-  );
+  const endpoint = intakeEndpoint();
+  if (!("error" in endpoint)) {
+    await postIntake(
+      {
+        type: "callback_request",
+        clinic: clinic.name,
+        ...validated.value,
+        submittedAt,
+      },
+      { delivered: "", failed: "" },
+    );
+  } else if (endpoint.error !== "missing") {
+    console.error("Callback intake URL is missing or is not a safe https address.");
+  }
+
+  return {
+    status: "delivered",
+    message:
+      "Your callback request has reached Maximum Healthcare. This is not a booked appointment. Our team will call you back on the number you shared.",
+  };
 }
 
 export async function submitCareerApplication(
@@ -264,36 +281,43 @@ export async function submitCareerApplication(
     };
   }
 
-  const endpoint = intakeEndpoint();
-  if ("error" in endpoint && endpoint.error === "missing") {
-    return {
-      status: "not_configured",
-      message:
-        "Nothing was sent. A careers inbox is not connected yet, so the clinic has not received this application. Call a published number instead. This is not a job offer.",
-    };
-  }
-
-  if ("error" in endpoint) {
-    console.error("Career intake URL is missing or is not a safe https address.");
+  const submittedAt = new Date().toISOString();
+  try {
+    await saveInboxRecord({
+      type: "career_application",
+      submittedAt,
+      ...validated.value,
+    });
+  } catch (error) {
+    console.error("Could not save career application to the staff inbox.", {
+      name: error instanceof Error ? error.name : "Error",
+    });
     return {
       status: "failed",
-      message: "The careers intake is not configured correctly on the server. Nothing was sent.",
+      message: "The application could not be saved. Nothing was sent. Call a published number instead.",
     };
   }
 
-  return postIntake(
-    {
-      type: "career_application",
-      clinic: clinic.name,
-      ...validated.value,
-      submittedAt: new Date().toISOString(),
-    },
-    {
-      delivered:
-        "Your application was delivered to the clinic’s intake service. This is not a job offer, and it does not mean a vacancy is open.",
-      failed: "The application could not be delivered. Nothing was sent. Call a published number instead.",
-    },
-  );
+  const endpoint = intakeEndpoint();
+  if (!("error" in endpoint)) {
+    await postIntake(
+      {
+        type: "career_application",
+        clinic: clinic.name,
+        ...validated.value,
+        submittedAt,
+      },
+      { delivered: "", failed: "" },
+    );
+  } else if (endpoint.error !== "missing") {
+    console.error("Career intake URL is missing or is not a safe https address.");
+  }
+
+  return {
+    status: "delivered",
+    message:
+      "Your application of interest has reached Maximum Healthcare. This is not a job offer. If your profile matches an upcoming opening, the team will contact you.",
+  };
 }
 
 async function postIntake(

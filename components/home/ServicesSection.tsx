@@ -10,7 +10,7 @@ export function ServicesSection() {
           <h2 id="services-heading">
             Our <span>Specialties</span>
           </h2>
-          <p>Bone, joint, spine, arthritis, and foot care. Ask the clinic which visit is right for you.</p>
+          <p>Bone and joint care, spine care and rehabilitation, arthritis treatment, and foot and ankle care.</p>
         </div>
         <SpecialtiesGrid />
         <BookWindow />

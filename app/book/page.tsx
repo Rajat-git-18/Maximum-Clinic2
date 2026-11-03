@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "Book an appointment",
-  description: `Request an appointment at ${clinic.name}. The form does not confirm a time, and a preview submission is not delivered.`,
+  description: `Request an appointment at ${clinic.name}. Our team reviews your preferred time and calls you back to confirm the visit.`,
   path: "/book",
 });
 
@@ -16,13 +16,13 @@ export default function BookPage() {
       <PageHero
         eyebrow="Appointments"
         title="Request an appointment."
-        lede="Four short steps. A preferred time is not a reservation. Until a booking inbox is connected, submitting the form does not send your details."
+        lede="Four short steps. Share your preferred day and time, and our team will call you back to confirm a suitable visit."
         breadcrumb={[
           { href: "/", label: "Home" },
           { label: "Book an appointment" },
         ]}
       />
-      <section className="section">
+      <section className="section" id="appointment-form">
         <div className="container container-wide">
           <p className="callout book-note">{clinic.emergencyNote}</p>
           <Suspense fallback={<p className="form-loading">Loading the request form…</p>}>

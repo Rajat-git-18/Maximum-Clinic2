@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "Patient resources",
-  description: `Practical information for visiting ${clinic.name}, including how appointment requests work and what has not been published yet.`,
+  description: `Practical information for visiting ${clinic.name}, including appointments, first-visit guidance, and clinic contact details.`,
   path: "/resources",
 });
 
@@ -18,7 +18,7 @@ export default function ResourcesPage() {
       <PageHero
         eyebrow="Patient resources"
         title="Before you visit."
-        lede="Practical information only. This page does not give medical advice, and it does not invent clinic policies that have not been confirmed."
+        lede="Practical guidance for appointments, first visits, and contacting Maximum Healthcare in Gandhi Nagar, Jammu."
         breadcrumb={[
           { href: "/", label: "Home" },
           { label: "Patient resources" },
@@ -30,31 +30,26 @@ export default function ResourcesPage() {
             <p className="callout">{clinic.emergencyNote}</p>
             <h2>How an appointment is arranged</h2>
             <p>
-              The <Link href="/book">appointment page</Link> collects a service, a preferred day, a preferred part of
-              the day, and a way to reply. It does not show open slots, and it does not confirm the visit. The clinic
-              confirms a time with you separately. You can also call{" "}
-              {clinic.phones.map((item) => item.display).join(" or ")}.
-            </p>
-            <p>
-              Until a booking inbox is connected, the form on this website is a preview and does not deliver the
-              request.
+              Use the <Link href="/book">appointment page</Link> to share your preferred service, day, and part of the
+              day, along with a contact number. Our team reviews the request and calls you back to confirm a suitable
+              visit time. You can also call {clinic.phones.map((item) => item.display).join(" or ")} directly.
             </p>
             <h2>A first visit</h2>
             <p>
-              A checklist of what to bring has not been published. When a visit is confirmed, ask the clinic which
-              documents or medicines to bring, and read the hours and location on the{" "}
-              <Link href="/contact">contact page</Link>.
+              Please bring a government-issued ID, previous reports or imaging related to your concern, a list of
+              current medicines, and any referral or insurance papers you hold. Check hours and directions on the{" "}
+              <Link href="/contact">contact page</Link> before you travel.
             </p>
             <h2>Changing a visit</h2>
             <p>
-              This website cannot reschedule or cancel an appointment that the clinic has already agreed. Call{" "}
-              {clinic.phones.map((item) => item.display).join(" or ")} and refer to the arrangement the clinic
-              confirmed.
+              To reschedule or cancel a confirmed appointment, call{" "}
+              {clinic.phones.map((item) => item.display).join(" or ")} and share the details already confirmed with
+              you. Our administrative team will help arrange a new time.
             </p>
-            <h2>What this website is not</h2>
+            <h2>Privacy during online requests</h2>
             <p>
-              It is not a patient portal, a medical record, or a place to send a detailed history. Do not include
-              sensitive health information in the appointment note.
+              Please keep appointment notes brief. Do not include a detailed medical history or sensitive health
+              information in the online form. Share clinical details only during your consultation with the care team.
             </p>
           </div>
         </Container>

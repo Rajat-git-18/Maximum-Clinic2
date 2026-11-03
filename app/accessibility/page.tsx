@@ -24,14 +24,15 @@ export default function AccessibilityPage() {
         <li>Text and background colours were checked for contrast.</li>
         <li>Motion is reduced when the device asks for that.</li>
         <li>Image frames that are not photographs are described that way, and they are not presented as the clinic.</li>
+        <li>Clinic films use a native player with controls. Each film loads only after you press play, and none autoplay with sound.</li>
       </ul>
       <h2>Known limits</h2>
       <ul>
-        <li>Photographs of the rooms have not been added. The gallery frames are graphic placeholders.</li>
-        <li>A map is omitted until there is a verified street address.</li>
+        <li>Gallery photographs are clinic-supplied stills. They are labelled by room, not as a live view of the clinic.</li>
+        <li>Written transcripts for the clinic films have not been published yet.</li>
         <li>The appointment form cannot be completed as a real booking until an inbox is connected.</li>
         <li>The interface is in English. Hindi can be added when translations are supplied.</li>
-        <li>Doctor names, a public email address, and photographs of the rooms have not been published.</li>
+        <li>A public email address has not been published. Individual doctor profiles are not listed on this website.</li>
       </ul>
       <h2>If something blocks you</h2>
       <p>

@@ -2,15 +2,18 @@ import { CareerForm } from "@/components/careers/CareerForm";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
+import { telHref } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "Careers",
-  description: `Send an application of interest to ${clinic.name} in ${clinic.cityCountry}. A current vacancies list has not been published, and the form does not offer a job.`,
+  description: clinic.careers.lede,
   path: "/careers",
 });
 
 export default function CareersPage() {
+  const callHref = telHref(clinic.phone);
+
   return (
     <>
       <PageHero
@@ -24,25 +27,43 @@ export default function CareersPage() {
       />
       <section className="section">
         <Container>
+          <div className="prose career-intro">
+            {clinic.careers.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <h2 className="career-steps-title">{clinic.careers.stepsTitle}</h2>
+          <ol className="career-steps">
+            {clinic.careers.steps.map((step, index) => (
+              <li key={step.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </li>
+            ))}
+          </ol>
           <div className="career-layout">
-            <div className="prose">
-              <h2>How this form works</h2>
-              <p>
-                {clinic.legalName} operates {clinic.name} in Gandhi Nagar, Jammu. Use the form if you want the clinic
-                to have your contact details and the kind of work you are interested in.
-              </p>
-              <ul>
-                <li>This is not a list of open jobs.</li>
-                <li>Submitting does not offer you a role or start a hiring process by itself.</li>
-                <li>Do not attach a CV here. If the clinic wants documents, they will ask when they reply.</li>
-                <li>
-                  Until a careers inbox is connected, the form is a preview and does not send your details.
-                </li>
-              </ul>
-              <p className="callout">
-                Prefer to speak first? Call {clinic.phones.map((item) => item.display).join(" or ")}.
-              </p>
-            </div>
+            <aside className="career-contact">
+              <p className="eyebrow">Contact</p>
+              <h2>{clinic.careers.contact.title}</h2>
+              <dl>
+                <div>
+                  <dt>Location</dt>
+                  <dd>{clinic.careers.contact.location}</dd>
+                </div>
+                <div>
+                  <dt>{clinic.careers.contact.phoneLabel}</dt>
+                  <dd>
+                    {callHref ? (
+                      <a href={callHref}>+91 {clinic.phones[0]?.display ?? "94190 29200"}</a>
+                    ) : (
+                      `+91 ${clinic.phones[0]?.display ?? "94190 29200"}`
+                    )}
+                  </dd>
+                </div>
+              </dl>
+              <p>{clinic.careers.contact.note}</p>
+            </aside>
             <CareerForm />
           </div>
         </Container>

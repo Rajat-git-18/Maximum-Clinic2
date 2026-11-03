@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "/",
     "/about",
-    doctorsHref(),
+    ...(clinic.doctors.length > 0 ? [doctorsHref()] : []),
     "/services",
     ...clinic.services.map((service) => `/services/${service.slug}`),
     ...clinic.doctors.map((doctor) => `/doctors/${doctor.slug}`),
@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources",
     "/contact",
     "/careers",
+    "/videos",
+    "/gallery",
     "/privacy",
     "/terms",
     "/accessibility",

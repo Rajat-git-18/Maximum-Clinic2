@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { clinic } from "@/content/clinic";
+import { telHref } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export function generateStaticParams() {
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = clinic.services.find((item) => item.slug === slug);
   if (!service) return {};
   return pageMeta({
-    title: service.name,
+    title: service.pageTitle ?? service.name,
     description: service.summary,
     path: `/services/${service.slug}`,
   });
@@ -28,12 +29,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) notFound();
 
   const others = clinic.services.filter((item) => item.slug !== service.slug);
+  const detailed = Boolean(service.offerings?.length);
+  const callHref = telHref(clinic.phone);
+  const callLabel = clinic.phones[0]?.display ?? "94190 29200";
 
   return (
     <>
       <PageHero
         eyebrow="Service"
-        title={service.name}
+        title={service.pageTitle ?? service.name}
         lede={service.summary}
         breadcrumb={[
           { href: "/", label: "Home" },
@@ -47,23 +51,57 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {service.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            {service.procedures.length > 0 ? (
+            {service.offerings && service.offerings.length > 0 ? (
+              <>
+                <h2 className="service-offerings-title">
+                  {service.offeringsTitle ?? "Core procedures and specialties"}
+                </h2>
+                <ul className="service-offerings">
+                  {service.offerings.map((offering) => (
+                    <li className="service-offering" key={offering.title}>
+                      <h3>{offering.title}</h3>
+                      <p>{offering.body}</p>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : service.procedures.length > 0 ? (
               <ul>
                 {service.procedures.map((procedure) => (
                   <li key={procedure}>{procedure}</li>
                 ))}
               </ul>
             ) : null}
-            <p className="callout">
-              Fees, duration, and clinical outcomes are not listed until the clinic publishes them.
-            </p>
+            {service.guidance ? (
+              <aside className="service-guidance">
+                <p className="eyebrow">Clinical note</p>
+                <p>{service.guidance}</p>
+              </aside>
+            ) : (
+              <p className="callout">
+                Fees, duration, and clinical outcomes are not listed until the clinic publishes them.
+              </p>
+            )}
           </div>
-          <div className="cta-row">
-            <Button href={`/book?service=${service.slug}`}>Request this service</Button>
-            <Button href="/contact" variant="secondary">
-              Contact the clinic
-            </Button>
-          </div>
+          {detailed ? (
+            <div className="cta-row">
+              <Button className="btn-capsule" href={`/book?service=${service.slug}#appointment-form`}>
+                Request Appointment
+              </Button>
+              {callHref ? (
+                <a className="btn btn-glass btn-capsule" href={callHref}>
+                  {service.callLabel ?? "Call Medical Desk"}: +91 {callLabel}
+                </a>
+              ) : null}
+            </div>
+          ) : (
+            <div className="cta-row">
+              <Button href={`/book?service=${service.slug}`}>Request this service</Button>
+              <Button href="/contact" variant="secondary">
+                Contact the clinic
+              </Button>
+            </div>
+          )}
           {others.length > 0 ? (
             <div className="related">
               <h2>Other services</h2>

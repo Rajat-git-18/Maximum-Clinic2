@@ -8,6 +8,7 @@ import { DraftNotice } from "@/components/layout/DraftNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Logo } from "@/components/layout/Logo";
+import { PublicOnly } from "@/components/layout/PublicOnly";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
@@ -52,15 +53,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           <Header />
         </Suspense>
-        <AccreditationBar />
+        <PublicOnly>
+          <AccreditationBar />
+        </PublicOnly>
         <main id="main" tabIndex={-1}>
-          <DraftNotice />
+          <PublicOnly>
+            <DraftNotice />
+          </PublicOnly>
           {children}
         </main>
-        <Footer />
-        <CallbackModal />
-        <QuickAccess />
-        <JsonLd />
+        <PublicOnly>
+          <Footer />
+          <CallbackModal />
+          <QuickAccess />
+          <JsonLd />
+        </PublicOnly>
       </body>
     </html>
   );

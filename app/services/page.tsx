@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
   title: "Services",
-  description: `Bone and joint care, spine care, arthritis treatment, and foot and ankle care at ${clinic.name} in Gandhi Nagar, Jammu.`,
+  description: `Bone and joint care, spine care, arthritis treatment, and foot and ankle care at ${clinic.name} in Jammu.`,
   path: "/services",
 });
 

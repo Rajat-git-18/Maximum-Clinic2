@@ -15,8 +15,9 @@ export function doctorsHref(): string {
 export const primaryNav: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  ...(clinic.doctors.length > 0 ? [{ href: doctorsHref(), label: "Doctors" }] : []),
   { href: "/services", label: "Services" },
+  { href: "/videos", label: "Videos" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
   { href: "/careers", label: "Careers" },

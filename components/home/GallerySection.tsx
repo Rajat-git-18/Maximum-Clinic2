@@ -1,5 +1,6 @@
+import { ClinicPhoto } from "@/components/media/ClinicPhoto";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { PlaceholderMedia } from "@/components/ui/PlaceholderMedia";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { clinic } from "@/content/clinic";
 
@@ -11,24 +12,24 @@ export function GallerySection() {
       <Container wide>
         <SectionHeading
           id="gallery-heading"
-          eyebrow="The rooms"
-          title="Photographs of the rooms come next."
-          lede="The clinic’s own photographs are not on this website yet. These frames are waiting for them. They are not pictures of the premises."
+          eyebrow={clinic.galleryPage.eyebrow}
+          title={clinic.galleryPage.title}
+          lede={clinic.galleryPage.lede}
           split
         />
         <ul className="gallery">
-          {clinic.gallery.map((item) => (
-            <li key={item.title}>
-              <PlaceholderMedia
-                label={item.title}
-                caption={item.caption}
-                motif={item.motif}
-                tone={item.tone}
-                ratio={item.ratio}
-              />
+          {clinic.gallery.map((item, index) => (
+            <li key={item.slug}>
+              <ClinicPhoto photo={item} featured={index === 0} />
             </li>
           ))}
         </ul>
+        <div className="cta-row">
+          <Button href="/gallery">Open the gallery</Button>
+          <Button href="/videos" variant="secondary">
+            Watch videos
+          </Button>
+        </div>
       </Container>
     </section>
   );
