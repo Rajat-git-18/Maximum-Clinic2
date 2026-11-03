@@ -1,12 +1,13 @@
+import { AddressLink } from "@/components/ui/AddressLink";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { clinic } from "@/content/clinic";
-import { clinicLocationLabels, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
+import { clinicLocationLinks, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
 
 export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3" }) {
   const Title = titleLevel;
   const email = mailtoHref(clinic.email);
   const maps = mapsHref();
-  const locations = clinicLocationLabels();
+  const locations = clinicLocationLinks();
 
   return (
     <div className="contact-grid">
@@ -17,8 +18,8 @@ export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3"
             <dt>Locations</dt>
             <dd>
               {locations.map((item) => (
-                <span key={item} className="contact-line">
-                  {item}
+                <span key={item.key} className="contact-line">
+                  <AddressLink href={item.href}>{item.text}</AddressLink>
                 </span>
               ))}
             </dd>
@@ -102,9 +103,9 @@ export function ContactDetails({ titleLevel = "h2" }: { titleLevel?: "h2" | "h3"
           referrerPolicy="no-referrer-when-downgrade"
         />
         {maps ? (
-          <a className="text-link" href={maps} target="_blank" rel="noopener noreferrer">
-            Get directions<span className="sr-only"> (opens in a new tab)</span>
-          </a>
+          <AddressLink className="text-link" href={maps}>
+            Get directions
+          </AddressLink>
         ) : null}
         <p className="map-emergency">{clinic.emergencyNote}</p>
       </div>

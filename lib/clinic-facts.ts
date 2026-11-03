@@ -97,13 +97,54 @@ export function clinicLocationLabels(): string[] {
   return clinic.locations.map(formatClinicLocation);
 }
 
+export function mapsSearchHref(query: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+export function mapsHrefForLocation(location: {
+  label: string;
+  street?: string;
+  locality: string;
+  region: string;
+  postalCode?: string;
+  country: string;
+  mapsUrl?: string;
+}): string {
+  if (location.mapsUrl?.trim()) return location.mapsUrl.trim();
+
+  const main = clinic.address;
+  const sameAsMain =
+    Boolean(location.street?.trim()) &&
+    location.street?.trim() === main.street.trim() &&
+    location.locality.trim() === main.locality.trim();
+  if (sameAsMain && clinic.mapsUrl) return clinic.mapsUrl;
+
+  const query = formatClinicLocation(location);
+  return mapsSearchHref(`Maximum Healthcare, ${query}`);
+}
+
+export type ClinicLocationLink = {
+  key: string;
+  label: string;
+  text: string;
+  href: string;
+};
+
+export function clinicLocationLinks(): ClinicLocationLink[] {
+  return clinic.locations.map((location) => ({
+    key: location.label,
+    label: location.label,
+    text: formatClinicLocation(location),
+    href: mapsHrefForLocation(location),
+  }));
+}
+
 export function mapsHref(): string | null {
   if (clinic.mapsUrl) return clinic.mapsUrl;
   const { street, locality, country } = clinic.address;
   if (!street.trim() || !locality.trim() || !country.trim()) return null;
   if ([street, locality, country].some(isPlaceholder)) return null;
-  const query = locationLabel();
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  return mapsSearchHref(locationLabel());
 }
 
 export function hasVerifiedAddress(): boolean {

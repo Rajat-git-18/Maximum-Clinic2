@@ -320,6 +320,20 @@ p {
   color: var(--green-dark);
 }
 
+.address-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(26, 56, 120, 0.35);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.address-link:hover,
+.address-link:focus-visible {
+  color: var(--green);
+  text-decoration-color: var(--green);
+}
+
 .site-header {
   position: sticky;
   top: 0;

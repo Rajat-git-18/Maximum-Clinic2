@@ -1,5 +1,7 @@
 import { LegalPage } from "@/components/layout/LegalPage";
+import { AddressLink } from "@/components/ui/AddressLink";
 import { clinic } from "@/content/clinic";
+import { locationLabel, mapsHref } from "@/lib/clinic-facts";
 import { pageMeta } from "@/lib/metadata";
 
 export const metadata = pageMeta({
@@ -9,6 +11,9 @@ export const metadata = pageMeta({
 });
 
 export default function PrivacyPage() {
+  const maps = mapsHref();
+  const address = locationLabel();
+
   return (
     <LegalPage
       eyebrow="Privacy"
@@ -80,8 +85,7 @@ export default function PrivacyPage() {
           <strong>Facility:</strong> Maximum Healthcare Pvt. Ltd.
         </li>
         <li>
-          <strong>Address:</strong> Gole Market, 358/A, opp. Peer Baba, Apsara Road, Gandhi Nagar, Jammu, J&amp;K
-          180004
+          <strong>Address:</strong> {maps ? <AddressLink href={maps}>{address}</AddressLink> : address}
         </li>
         <li>
           <strong>Phone assistance:</strong> <a href="tel:+919419029200">+91 94190 29200</a>

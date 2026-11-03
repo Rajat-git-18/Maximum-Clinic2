@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { AccreditationStrip } from "@/components/home/AccreditationStrip";
 import { Logo } from "@/components/layout/Logo";
+import { AddressLink } from "@/components/ui/AddressLink";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { clinic } from "@/content/clinic";
 import { WhatsAppIcon } from "@/components/ui/Icons";
-import { clinicLocationLabels, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
+import { clinicLocationLinks, mailtoHref, mapsHref, telHref, whatsappHref } from "@/lib/clinic-facts";
 import { policyNav, primaryNav } from "@/lib/navigation";
 
 export function Footer() {
   const maps = mapsHref();
   const email = mailtoHref(clinic.email);
-  const locations = clinicLocationLabels();
+  const locations = clinicLocationLinks();
 
   return (
     <footer className="site-footer">
@@ -45,7 +46,9 @@ export function Footer() {
           <p className="footer-label">Contact</p>
           <ul className="footer-links">
             {locations.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item.key}>
+                <AddressLink href={item.href}>{item.text}</AddressLink>
+              </li>
             ))}
             {clinic.phones.map((item) => {
               const href = telHref(item.e164);

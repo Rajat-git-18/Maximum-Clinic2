@@ -73,6 +73,8 @@ export type ClinicLocation = {
   region: string;
   postalCode?: string;
   country: string;
+  /** Optional Google Maps place URL for this centre. */
+  mapsUrl?: string;
 };
 
 export const clinic = {
@@ -92,7 +94,8 @@ export const clinic = {
     { days: "Sunday", hours: "9:00 am–3:30 pm" },
   ],
   bookingMethod: "Call 94190 29200, or send an appointment request on this website.",
-  mapsUrl: "https://www.google.com/maps/place/Maximum+Clinics/@32.7002309,74.860236,17z",
+  mapsUrl:
+    "https://www.google.com/maps/place/Maximum+Clinics/@32.7002354,74.8576557,776m/data=!3m2!1e3!4b1!4m6!3m5!1s0x391e84b044abcd43:0xfc3648a9031bd5d8!8m2!3d32.7002309!4d74.860236!16s%2Fg%2F11c56980x7",
   mapEmbedUrl: "https://maps.google.com/maps?q=32.7002309,74.860236&z=16&output=embed",
   geo: { latitude: 32.7002309, longitude: 74.860236 },
   whatsappEnabled: true,
@@ -115,6 +118,8 @@ export const clinic = {
       region: "Jammu and Kashmir",
       postalCode: "180004",
       country: "India",
+      mapsUrl:
+        "https://www.google.com/maps/place/Maximum+Clinics/@32.7002354,74.8576557,776m/data=!3m2!1e3!4b1!4m6!3m5!1s0x391e84b044abcd43:0xfc3648a9031bd5d8!8m2!3d32.7002309!4d74.860236!16s%2Fg%2F11c56980x7",
     },
     {
       label: "Srinagar",
@@ -366,7 +371,7 @@ export const clinic = {
   googleReviews: {
     rating: 4.7,
     count: 88,
-    url: "https://www.google.com/maps/place/Maximum+Clinics/@32.7002309,74.860236,17z/data=!4m8!3m7!1s0x391e84b044abcd43:0xfc3648a9031bd5d8!8m2!3d32.7002309!4d74.860236!9m1!1b1!16s%2Fg%2F11c56980x7",
+    url: "https://www.google.com/maps/place/Maximum+Clinics/@32.7002354,74.8576557,776m/data=!3m2!1e3!4b1!4m6!3m5!1s0x391e84b044abcd43:0xfc3648a9031bd5d8!8m2!3d32.7002309!4d74.860236!16s%2Fg%2F11c56980x7",
     items: [
       {
         name: "manish mansotra",
