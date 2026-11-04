@@ -88,7 +88,7 @@ export const clinic = {
   phones: [{ display: "94190 29200", e164: "+919419029200" }] satisfies PhoneNumber[],
   email: "Admn.maxclinics@gmail.com",
   hours: "Monday to Saturday, 10:00 am–6:00 pm. Sunday, 9:00 am–3:30 pm.",
-  hoursShort: "Mon–Sat 10 am–6 pm · Sun 9 am–3:30 pm",
+  hoursShort: "Mon–Sat 10 am–6 pm, Sun 9 am–3:30 pm",
   schedule: [
     { days: "Monday to Saturday", hours: "10:00 am–6:00 pm" },
     { days: "Sunday", hours: "9:00 am–3:30 pm" },
